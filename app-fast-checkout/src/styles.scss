@@ -1,4 +1,102 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
+  p {
+    margin: 0;
+  }
+}
+
+$cor-primary: #425CCB;
+$cor-primary-dark: #213454;
+$cor-primary-light: #005D9A;
+$cor-body: #F5F5F5;
+$cor-secondary: #4D4F5C;
+$cor-warning: #FFD63E;
+$cor-sucess: #27AE60;
+$cor-light: #FFFFFF;
+
+.background {
+  background-color: $cor-body;
+}
+
+.buttonInfo {
+  background-color: $cor-primary;
+  color: $cor-light;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+  font-weight: 700;
+}
+
+.txt-identificacao {
+  color: $cor-primary;
+  font-weight: 700;
+}
+
+.txt-principal {
+  color: $cor-secondary;
+  font-weight: 700;
+}
+
+.txt-secundario {
+  color: $cor-secondary;
+}
+
+.color-sucess {
+  color: $cor-sucess;
+}
+
+.buttonNumber {
+  color: $cor-primary-light;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 16px;
+  background: rgba(0, 93, 154, 0.2);
+  border-radius: 100px;
+}
+
+.paginador {
+  width: 4rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 2rem;
+  border: 1px solid $cor-primary;
+  color: $cor-primary;
+}
+
+.buttonNext {
+  width: 100%;
+  height: 3.5rem;
+  color: $cor-light;
+  background-color: $cor-primary-dark;
+}
+
+.input-label-simples {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: $cor-secondary;
+}
+
+.input-label-composto {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: $cor-secondary;
+  .i{
+    color: $cor-primary;
+    font-size: 1.5rem;
+  }
 }
