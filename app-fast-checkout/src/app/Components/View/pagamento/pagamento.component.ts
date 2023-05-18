@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./pagamento.component.scss']
 })
 export class PagamentoComponent {
-
+  dynamicRoutePay = '/pagamento';
+  btnPay = 'btnPay';
+  dynamicRouteBack = '/idClienteInstalacao';
+  btnBack = 'btnBack';
 }
