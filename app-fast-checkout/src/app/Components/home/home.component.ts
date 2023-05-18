@@ -8,6 +8,7 @@ import { IdClienteP1Component } from '../View/id-cliente-p1/id-cliente-p1.compon
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  backgroundClass = 'background';
   @ViewChild('componentRef') componentRef!: IdClienteP1Component;
 
   constructor(private viewportScroller: ViewportScroller) {}

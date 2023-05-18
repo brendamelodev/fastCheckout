@@ -1,0 +1,26 @@
+<div class="container-fluid vh-100">
+  <app-nav></app-nav>
+  <app-paginator [numeracao]="numeracao" [txtPaginator]="txtPaginator" class="mx-5"></app-paginator>
+
+  <div class="row background">
+    <div class="col d-flex flex-column justify-content-evenly px-3 box">
+      <p class="txt-secundario px-2 py-4">Abaixo a lista de imóveis vinculados ao documento informado. Por gentileza,
+        selecione a instalação desejada para realizar o pagamento:</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col d-flex my-4">
+      <span class="txt-principal">CDC/Ligação</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col pb-5 ">
+      <app-imovel [routeCDC]="routeCDC"></app-imovel>
+      <app-imovel [routeCDC]="routeCDC"></app-imovel>
+    </div>
+  </div>
+
+  <app-button [btnBack]="btnBack" [dynamicRouteBack]="dynamicRouteBack"></app-button>
+</div>

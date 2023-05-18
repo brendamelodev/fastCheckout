@@ -7,6 +7,13 @@ import { NavComponent } from './Components/nav/nav.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { HomeComponent } from './Components/home/home.component';
 import { IdClienteP1Component } from './Components/View/id-cliente-p1/id-cliente-p1.component';
+import { ButtonComponent } from './Components/button/button.component';
+import { PaginatorComponent } from './Components/paginator/paginator.component';
+import { IdClienteInstalacaoComponent } from './Components/View/id-cliente-instalacao/id-cliente-instalacao.component';
+import { ImovelComponent } from './Components/imovel/imovel.component';
+import { FaturasComponent } from './Components/View/faturas/faturas.component';
+import { ValorFaturaComponent } from './Components/valor-fatura/valor-fatura.component';
+import { PagamentoComponent } from './Components/View/pagamento/pagamento.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +21,14 @@ import { IdClienteP1Component } from './Components/View/id-cliente-p1/id-cliente
     NavComponent,
     FooterComponent,
     HomeComponent,
-    IdClienteP1Component
+    IdClienteP1Component,
+    ButtonComponent,
+    PaginatorComponent,
+    IdClienteInstalacaoComponent,
+    ImovelComponent,
+    FaturasComponent,
+    ValorFaturaComponent,
+    PagamentoComponent
   ],
   imports: [
     BrowserModule,

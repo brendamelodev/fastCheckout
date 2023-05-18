@@ -1,10 +1,9 @@
-<app-nav></app-nav>
-
 <div class="container-fluid background">
+  <app-nav [backgroundClass]="backgroundClass"></app-nav>
   <div class="row">
-    <div class="col d-flex flex-column justify-content-around px-4 box">
-      <h1 class="txt-principal text-center fs-4 pt-4">Seja bem-vindo (a) ao portal de pagamentos da EMPRESA em parceiria com a Flexpag!</h1>
-      <p class="fs-6 txt-secundario">Aqui você pode pagar suas contas <b>em até 21x no Cartão de Crédito,</b> Cartão Bolsa Família e PIX - de forma rápida,
+    <div class="col d-flex flex-column justify-content-evenly px-3 box">
+      <h1 class="txt-principal fs-3 text-center lh-base">Seja bem-vindo (a) ao portal de pagamentos da BRK em parceiria com a Flexpag!</h1>
+      <p class="txt-secundario px-2">Aqui você pode pagar suas contas <b>em até 21x no Cartão de Crédito,</b> Cartão Bolsa Família e PIX - de forma rápida,
         simples e segura!</p>
       <button (click)="scrollToComponent()" type="button" class="buttonInfo btn align-self-end">
         Iniciar
@@ -15,4 +14,5 @@
 </div>
 
 <app-id-cliente-p1 id="componentRef"></app-id-cliente-p1>
+
 <app-footer></app-footer>

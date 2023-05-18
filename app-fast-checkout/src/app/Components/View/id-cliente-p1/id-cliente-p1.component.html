@@ -1,23 +1,21 @@
 <div class="container">
   <div class="row">
-    <div class="col box d-flex flex-column justify-content-evenly">
-      <div class="d-flex align-items-center gap-3">
-        <span class="paginador">1-3</span>
-        <p class="txt-identificacao m-0">Identificação do Cliente</p>
-      </div>
+    <div class="col box d-flex flex-column justify-content-evenly mt-2">
+      <app-paginator [numeracao]="numeracao" [txtPaginator]="txtPaginator"></app-paginator>
       <div class="d-flex">
         <span class="buttonInfo">CPF/CNPJ</span>
       </div>
       <form>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="DIGITE O NOME DA CIDADE">
+          <input type="text" class="form-control" id="floatingInput" placeholder="txt">
           <label class="input-label-composto" for="floatingInput">DIGITE O NOME DA CIDADE <i class="bi bi-search"></i></label>
         </div>
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="DIGITE O NOME DA CIDADE">
+        <div class="form-floating mb-5">
+          <input type="text" class="form-control" id="floatingInput" placeholder="txt">
           <label class="input-label-simples" for="floatingInput">DIGITE O CPF / CNPJ DO TITULAR</label>
         </div>
-        <button type="button" class="buttonNext btn">Avançar</button>
+
+        <app-button [btnNext]="btnNext" [dynamicRouteNext]="dynamicRouteNext"></app-button>
       </form>
     </div>
   </div>

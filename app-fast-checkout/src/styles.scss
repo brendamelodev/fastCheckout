@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  p {
+  p,
+  h1 {
     margin: 0;
   }
 }
@@ -16,8 +17,16 @@ $cor-warning: #FFD63E;
 $cor-sucess: #27AE60;
 $cor-light: #FFFFFF;
 
+.cor-primary{
+  color: $cor-primary;
+  background-color: $cor-primary;
+}
+
 .background {
   background-color: $cor-body;
+}
+.background-light {
+  background-color: $cor-light;
 }
 
 .buttonInfo {
@@ -32,42 +41,73 @@ $cor-light: #FFFFFF;
 }
 
 .txt-identificacao {
+  font-size: 1.15rem;
   color: $cor-primary;
   font-weight: 700;
 }
 
 .txt-principal {
+  font-size: 1.2rem;
   color: $cor-secondary;
   font-weight: 700;
 }
 
-.txt-secundario {
+.txt-principal-pequeno{
+  font-size: 0.75rem;
   color: $cor-secondary;
+  font-weight: 700;
+}
+
+.txt-secundario, .txt-secundario-pequeno {
+  color: $cor-secondary;
+}
+
+.txt-secundario-pequeno{
+  font-size: 0.75rem;
 }
 
 .color-sucess {
   color: $cor-sucess;
 }
 
+.linha-vertical {
+  height: 5.5rem;
+  color: $cor-secondary;
+  opacity: 15%;
+}
+
 .buttonNumber {
   color: $cor-primary-light;
+  font-size: 0.5rem;
+  font-weight: 700;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 70px;
-  height: 16px;
-  background: rgba(0, 93, 154, 0.2);
+  width: 4.5rem;
+  height: 1rem;
+  background-color: rgba($cor-primary-light, 0.2);
   border-radius: 100px;
 }
 
 .paginador {
   width: 4rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 2rem;
+  border: 1px solid $cor-primary;
+  color: $cor-primary;
+}
+
+.btnSelect {
+  width: 10rem;
   height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   border-radius: 2rem;
   border: 1px solid $cor-primary;
@@ -80,12 +120,20 @@ $cor-light: #FFFFFF;
   color: $cor-light;
   background-color: $cor-primary-dark;
 }
+.buttonBack {
+  width: 100%;
+  height: 3.5rem;
+  color: $cor-primary;
+  border: 1px solid $cor-primary;
+  font-weight: 700;
+}
 
 .input-label-simples {
   display: flex;
   align-items: center;
   font-size: 0.75rem;
   color: $cor-secondary;
+  opacity: 50%;
 }
 
 .input-label-composto {
@@ -95,8 +143,10 @@ $cor-light: #FFFFFF;
   align-items: center;
   font-size: 0.75rem;
   color: $cor-secondary;
-  .i{
+  opacity: 50%;
+  .i {
     color: $cor-primary;
     font-size: 1.5rem;
+    opacity: 100%;
   }
 }
