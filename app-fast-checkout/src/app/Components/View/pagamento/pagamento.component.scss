@@ -1,0 +1,32 @@
+@import 'src/styles.scss';
+
+.row {
+  padding: 1rem 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: $cor-body;
+}
+
+.vr {
+  height: 2.5rem;
+  color: $cor-secondary;
+  opacity: 15%;
+}
+
+.faq {
+  font-size: 0.75rem;
+  color: $cor-primary;
+}
+
+.background-light {
+  background-color: $cor-light;
+}
+
+.fs-alterar {
+  font-size: 0.875rem;
+}
+
+#parcelas{
+  color: $cor-primary;
+  font-weight: 700;
+  font-size: 1.125rem;
+}

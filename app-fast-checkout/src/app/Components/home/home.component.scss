@@ -1,11 +1,19 @@
+@import 'src/styles.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .box {
   height: 50vh;
 }
 
-.buttonInfo {
+.btn-info {
   padding: 24px;
   padding-right: 12px;
   font-weight: 400;
+
   .bi-arrow-down-short {
     font-size: 3rem;
   }

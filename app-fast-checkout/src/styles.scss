@@ -1,13 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  p,
-  h1 {
-    margin: 0;
-  }
-}
-
 $cor-primary: #425CCB;
 $cor-primary-dark: #213454;
 $cor-primary-light: #005D9A;
@@ -17,19 +7,21 @@ $cor-warning: #FFD63E;
 $cor-sucess: #27AE60;
 $cor-light: #FFFFFF;
 
-.cor-primary{
-  color: $cor-primary;
-  background-color: $cor-primary;
+* {
+  font-family: 'Roboto', sans-serif;
+
+  p,
+  h1 {
+    margin: 0;
+    color: $cor-secondary;
+  }
 }
 
 .background {
   background-color: $cor-body;
 }
-.background-light {
-  background-color: $cor-light;
-}
 
-.buttonInfo {
+.btn-info {
   background-color: $cor-primary;
   color: $cor-light;
   height: 3rem;
@@ -40,120 +32,11 @@ $cor-light: #FFFFFF;
   font-weight: 700;
 }
 
-.txt-identificacao {
+.txt-contrast {
   font-size: 1.15rem;
-  color: $cor-primary;
   font-weight: 700;
 }
 
-.txt-principal {
-  font-size: 1.2rem;
-  color: $cor-secondary;
-  font-weight: 700;
-}
-
-.txt-principal-pequeno{
+.txt-small {
   font-size: 0.75rem;
-  color: $cor-secondary;
-  font-weight: 700;
-}
-
-.txt-secundario, .txt-secundario-pequeno {
-  color: $cor-secondary;
-}
-
-.txt-secundario-pequeno{
-  font-size: 0.75rem;
-}
-
-.color-sucess {
-  color: $cor-sucess;
-}
-
-.linha-vertical {
-  height: 5.5rem;
-  color: $cor-secondary;
-  opacity: 15%;
-}
-
-.buttonNumber {
-  color: $cor-primary-light;
-  font-size: 0.5rem;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 4.5rem;
-  height: 1rem;
-  background-color: rgba($cor-primary-light, 0.2);
-  border-radius: 100px;
-}
-
-.paginador {
-  width: 4rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  border-radius: 2rem;
-  border: 1px solid $cor-primary;
-  color: $cor-primary;
-}
-
-.btnSelect {
-  width: 10rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  font-weight: 700;
-  border-radius: 2rem;
-  border: 1px solid $cor-primary;
-  color: $cor-primary;
-}
-
-.buttonNext {
-  width: 100%;
-  height: 3.5rem;
-  color: $cor-light;
-  background-color: $cor-primary-dark;
-}
-.buttonBack {
-  width: 100%;
-  height: 3.5rem;
-  color: $cor-primary;
-  border: 1px solid $cor-primary;
-  font-weight: 700;
-}
-.buttonPay {
-  width: 100%;
-  height: 3.5rem;
-  font-weight: 700;
-  color: $cor-primary;
-  background-color: $cor-warning;
-}
-
-.input-label-simples {
-  display: flex;
-  align-items: center;
-  font-size: 0.75rem;
-  color: $cor-secondary;
-  opacity: 50%;
-}
-
-.input-label-composto {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
-  color: $cor-secondary;
-  opacity: 50%;
-  .i {
-    color: $cor-primary;
-    font-size: 1.5rem;
-    opacity: 100%;
-  }
 }

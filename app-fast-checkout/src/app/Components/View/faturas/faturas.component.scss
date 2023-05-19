@@ -1,8 +1,25 @@
-.txt-secundario-pequeno,
-.txt-principal-pequeno {
-  font-size: 0.80rem;
-}
+@import 'src/styles.scss';
 
 p {
+  font-size: 0.80rem;
   margin: 4px 0;
+}
+
+.vr {
+  height: 5.5rem;
+  color: $cor-secondary;
+  opacity: 15%;
+}
+
+.btnSelect {
+  width: 10rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 2rem;
+  border: 1px solid $cor-primary;
+  color: $cor-primary;
 }

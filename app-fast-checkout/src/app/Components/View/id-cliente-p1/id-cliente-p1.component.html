@@ -3,17 +3,16 @@
     <div class="col box d-flex flex-column justify-content-evenly mt-2">
       <app-paginator [numeracao]="numeracao" [txtPaginator]="txtPaginator"></app-paginator>
       <div class="d-flex">
-        <span class="buttonInfo">CPF/CNPJ</span>
+        <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form>
-        <div class="form-floating mb-3">
+        <!-- <div class="form-floating mb-3">
           <input type="text" class="form-control" id="floatingInput" placeholder="txt">
-          <label class="input-label-composto" for="floatingInput">DIGITE O NOME DA CIDADE <i class="bi bi-search"></i></label>
-        </div>
-        <div class="form-floating mb-5">
-          <input type="text" class="form-control" id="floatingInput" placeholder="txt">
-          <label class="input-label-simples" for="floatingInput">DIGITE O CPF / CNPJ DO TITULAR</label>
-        </div>
+          <label class="input-label-composto" for="floatingInput">DIGITE O NOME DA CIDADE <i
+              class="bi bi-search"></i></label>
+        </div> -->
+        <app-input [inputType]="'text'" [placeholderText]="'digite o nome da cidade'"></app-input>
+        <app-input [inputType]="'text'" [placeholderText]="'digite o cpf / cnpj do titular'"></app-input>
 
         <app-button [btnNext]="btnNext" [dynamicRouteNext]="dynamicRouteNext"></app-button>
       </form>

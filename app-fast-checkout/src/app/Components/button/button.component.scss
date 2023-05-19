@@ -1,0 +1,24 @@
+@import 'src/styles.scss';
+
+.buttonNext {
+  width: 100%;
+  height: 3.5rem;
+  color: $cor-light;
+  background-color: $cor-primary-dark;
+}
+
+.buttonBack {
+  width: 100%;
+  height: 3.5rem;
+  color: $cor-primary;
+  border: 1px solid $cor-primary;
+  font-weight: 700;
+}
+
+.buttonPay {
+  width: 100%;
+  height: 3.5rem;
+  font-weight: 700;
+  color: $cor-primary;
+  background-color: $cor-warning;
+}

@@ -1,0 +1,19 @@
+@import 'src/styles.scss';
+
+#paginador {
+  width: 4rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 2rem;
+  border: 1px solid $cor-primary;
+  color: $cor-primary;
+}
+
+#txt-identificacao {
+  font-size: 1.15rem;
+  color: $cor-primary;
+  font-weight: 700;
+}

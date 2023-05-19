@@ -1,5 +1,78 @@
 <div class="container-fluid vh-100">
-  <h1 class="py-5">Pagamento Component</h1>
-  <app-button [btnPay]="btnPay" [dynamicRoutePay]="dynamicRoutePay"></app-button>
-  <app-button [btnBack]="btnBack" [dynamicRouteBack]="dynamicRouteBack"></app-button>
+  <app-nav></app-nav>
+  <app-paginator [numeracao]="'3-3'" [txtPaginator]="'Pagamento'" class="mx-5"></app-paginator>
+
+  <div class="row d-flex align-items-center">
+    <div class="col-5">
+      <p class="txt-small text-uppercase">cpf</p>
+      <p class="fs-6 txt-contrast">123.456.789-00</p>
+    </div>
+    <div class="col-1 p-0">
+      <div class="d-flex">
+        <div class="vr"></div>
+      </div>
+    </div>
+    <div class="col-6">
+      <p class="txt-small text-uppercase">código do cliente</p>
+      <p class="fs-6 txt-contrast">11111111111</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="txt-contrast pb-2">Forma de Pagamento</p>
+    <div class="col-2 d-flex align-items-center">
+      <i>ICONE</i>
+    </div>
+    <div class="col-6">
+      <p class="text-uppercase txt-small">Cartão de Crédito</p>
+      <p class="fw-bold">Em até 21 vezes</p>
+    </div>
+    <div class="col-4 d-flex align-items-end justify-content-end">
+      <span class="d-flex align-items-center gap-2">
+        <p class="text-uppercase fs-alterar">alterar</p>
+        <i class="bi bi-chevron-down"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="txt-contrast pb-2">Dados do cartão de crédito</p>
+    <form>
+      <app-input [inputType]="'number'" [placeholderText]="'número do cartão'"></app-input>
+      <app-input [inputType]="'text'" [placeholderText]="'nome impresso no cartão'"></app-input>
+      <div class="d-flex gap-2">
+        <app-input class="flex-grow-1" [inputType]="'number'" [placeholderText]="'validade mm/aa'"></app-input>
+        <app-input class="flex-grow-1" [inputType]="'number'" [placeholderText]="'cvc'"></app-input>
+      </div>
+      <app-input [inputType]="'number'" [placeholderText]="'cep do endereço de cobrança'"></app-input>
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <p class="txt-small">Parcelas</p>
+      <p id="parcelas">21x de R$ 50,83</p>
+    </div>
+    <div class="col-4 d-flex align-items-end justify-content-end">
+      <span class="d-flex align-items-center gap-2">
+        <p class="text-uppercase fs-alterar">alterar</p>
+        <i class="bi bi-chevron-down"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="row py-4">
+    <p class="txt-contrast pb-2">Informe os dados do comprovante</p>
+    <form>
+      <app-input [inputType]="'text'" [placeholderText]="'nome completo'"></app-input>
+      <app-input [inputType]="'email'" [placeholderText]="'e-mail'"></app-input>
+      <app-input [inputType]="'tel'" [placeholderText]="'telefone/celular'"></app-input>
+    </form>
+    <a href="http://" class="text-decoration-none faq fw-bold text-center pt-2">Por que pedimos isso?</a>
+  </div>
+
+  <div class="row background-light">
+    <app-button [btnPay]="'btnPay'" [dynamicRoutePay]="'/'"></app-button>
+    <app-button [btnBack]="'btnBack'" [dynamicRouteBack]="'/faturas'"></app-button>
+  </div>
 </div>

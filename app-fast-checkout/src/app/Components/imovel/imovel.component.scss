@@ -1,1 +1,14 @@
+@import 'src/styles.scss';
 
+#buttonNumber {
+  color: $cor-primary-light;
+  font-size: 0.5rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.5rem;
+  height: 1rem;
+  background-color: rgba($cor-primary-light, 0.2);
+  border-radius: 100px;
+}

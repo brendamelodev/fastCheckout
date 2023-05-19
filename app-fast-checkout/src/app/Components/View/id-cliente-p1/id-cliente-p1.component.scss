@@ -1,19 +1,29 @@
-.box{
+@import 'src/styles.scss';
+
+.box {
   height: 50vh;
 }
 
-.buttonInfo{
+.btn-info {
   margin: auto;
   width: 12rem;
 }
 
-.input-label-composto{
-  i{
-    color: rgb(16, 102, 195);
+.input-label-composto {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba($cor-secondary, 0.5);
+
+  i {
+    color: $cor-primary;
     font-size: 1.5rem;
+    opacity: 100%;
   }
 }
 
-.form-control{
+.form-control {
   height: 3rem;
 }

@@ -1,13 +1,21 @@
+@import 'src/styles.scss';
+
 .background {
   margin: 0;
   width: 100vw;
 }
 
-.logo{
+.logo {
   width: 5rem;
   height: auto;
 }
 
-.txt-principal{
+.txt-security {
   font-size: 0.65rem;
+  color: $cor-secondary;
+  font-weight: 700;
+}
+
+.bi-shield-lock-fill{
+  color: $cor-sucess;
 }

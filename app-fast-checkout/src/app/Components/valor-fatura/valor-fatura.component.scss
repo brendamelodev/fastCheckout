@@ -1,7 +1,15 @@
-.letraMinuscula {
-  font-size: 0.6rem;
+@import 'src/styles.scss';
+
+.container {
+  background-color: $cor-light;
 }
 
-.txt-secundario {
+.valor {
   font-size: 1.15rem;
+}
+
+.txt-small-contrast {
+  font-size: 0.6rem;
+  color: $cor-secondary;
+  font-weight: 700;
 }

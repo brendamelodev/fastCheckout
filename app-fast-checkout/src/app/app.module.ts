@@ -14,6 +14,7 @@ import { ImovelComponent } from './Components/imovel/imovel.component';
 import { FaturasComponent } from './Components/View/faturas/faturas.component';
 import { ValorFaturaComponent } from './Components/valor-fatura/valor-fatura.component';
 import { PagamentoComponent } from './Components/View/pagamento/pagamento.component';
+import { InputComponent } from './Components/input/input.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PagamentoComponent } from './Components/View/pagamento/pagamento.compon
     ImovelComponent,
     FaturasComponent,
     ValorFaturaComponent,
-    PagamentoComponent
+    PagamentoComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
