@@ -1,6 +1,6 @@
 <div class="container-fluid vh-100">
   <app-nav></app-nav>
-  <app-paginator [numeracao]="numeracao" [txtPaginator]="txtPaginator" class="mx-5"></app-paginator>
+  <app-paginator [numeracao]="'2-3'" [txtPaginator]="'Seleção de Faturas'" class="mx-5"></app-paginator>
 
   <div class="row d-flex align-items-center background p-3">
     <div class="col-3">
@@ -26,13 +26,18 @@
     </div>
   </div>
 
-  <div class="row background">
-    <div class="col pb-2">
-      <app-valor-fatura [routeFatura]="routeFatura"></app-valor-fatura>
-      <app-valor-fatura [routeFatura]="routeFatura"></app-valor-fatura>
-      <app-valor-fatura [routeFatura]="routeFatura"></app-valor-fatura>
-      <app-valor-fatura [routeFatura]="routeFatura"></app-valor-fatura>
-      <app-valor-fatura [routeFatura]="routeFatura"></app-valor-fatura>
+  <div class="row background pb-3">
+    <div class="col pb-2 overflow-auto">
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
+      <app-valor-fatura [routeFatura]="'/pagamento'"></app-valor-fatura>
     </div>
   </div>
 
@@ -46,6 +51,6 @@
     </div>
   </div>
 
-  <app-button [btnNext]="btnNext" [dynamicRouteNext]="dynamicRouteNext"></app-button>
-  <app-button [btnBack]="btnBack" [dynamicRouteBack]="dynamicRouteBack"></app-button>
+  <app-button [btnNext]="'btnNext'" [dynamicRouteNext]="'/pagamento'"></app-button>
+  <app-button [btnBack]="'btnBack'" [dynamicRouteBack]="'/idClienteInstalacao'"></app-button>
 </div>

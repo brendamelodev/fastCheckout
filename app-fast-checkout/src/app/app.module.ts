@@ -15,6 +15,7 @@ import { FaturasComponent } from './Components/View/faturas/faturas.component';
 import { ValorFaturaComponent } from './Components/valor-fatura/valor-fatura.component';
 import { PagamentoComponent } from './Components/View/pagamento/pagamento.component';
 import { InputComponent } from './Components/input/input.component';
+import { TypePayComponent } from './Components/type-pay/type-pay.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { InputComponent } from './Components/input/input.component';
     FaturasComponent,
     ValorFaturaComponent,
     PagamentoComponent,
-    InputComponent
+    InputComponent,
+    TypePayComponent
   ],
   imports: [
     BrowserModule,

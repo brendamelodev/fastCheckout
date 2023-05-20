@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col box d-flex flex-column justify-content-evenly mt-2">
-      <app-paginator [numeracao]="numeracao" [txtPaginator]="txtPaginator"></app-paginator>
+      <app-paginator [numeracao]="'1-3'" [txtPaginator]="'Identificação do Cliente'"></app-paginator>
       <div class="d-flex">
         <span class="btn-info">CPF/CNPJ</span>
       </div>
@@ -14,7 +14,7 @@
         <app-input [inputType]="'text'" [placeholderText]="'digite o nome da cidade'"></app-input>
         <app-input [inputType]="'text'" [placeholderText]="'digite o cpf / cnpj do titular'"></app-input>
 
-        <app-button [btnNext]="btnNext" [dynamicRouteNext]="dynamicRouteNext"></app-button>
+        <app-button [btnNext]="'btnNext'" [dynamicRouteNext]="'/idClienteInstalacao'"></app-button>
       </form>
     </div>
   </div>

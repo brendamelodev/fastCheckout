@@ -6,8 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./id-cliente-p1.component.scss']
 })
 export class IdClienteP1Component {
-  dynamicRouteNext = '/idClienteInstalacao';
-  btnNext = 'btnNext';
-  numeracao = '1-3'
-  txtPaginator = 'Identificação do Cliente'
 }

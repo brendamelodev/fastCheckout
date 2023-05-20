@@ -6,11 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./faturas.component.scss']
 })
 export class FaturasComponent {
-  routeFatura = '/pagamento';
-  dynamicRouteNext = '/pagamento';
-  btnNext = 'btnNext';
-  dynamicRouteBack = '/idClienteInstalacao';
-  btnBack = 'btnBack';
-  numeracao = '2-3'
-  txtPaginator = 'Seleção de Faturas'
 }

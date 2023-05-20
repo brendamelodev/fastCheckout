@@ -6,9 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./id-cliente-instalacao.component.scss']
 })
 export class IdClienteInstalacaoComponent {
-  dynamicRouteBack = '/home';
-  btnBack = 'btnBack';
-  routeCDC = '/faturas';
-  numeracao = '1-3'
-  txtPaginator = 'Identificação do Cliente'
 }

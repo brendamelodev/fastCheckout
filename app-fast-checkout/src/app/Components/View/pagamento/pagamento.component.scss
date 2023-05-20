@@ -12,6 +12,13 @@
   opacity: 15%;
 }
 
+hr {
+  margin: auto;
+  padding: auto;
+  width: 100%;
+  color: rgba($cor-secondary, 0.75);
+}
+
 .faq {
   font-size: 0.75rem;
   color: $cor-primary;
@@ -25,8 +32,39 @@
   font-size: 0.875rem;
 }
 
-#parcelas{
+.offcanvas {
+  --bs-offcanvas-height: auto;
+  --bs-offcanvas-padding-y: 1.5rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+#parcelas {
   color: $cor-primary;
   font-weight: 700;
   font-size: 1.125rem;
+}
+
+.parcelamento {
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid $cor-secondary;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  label {
+    font-weight: bold;
+
+    .numbParcela,
+    .valorParcela {
+      padding-right: 0.25rem;
+      font-size: 1.2rem;
+
+      &.valorParcela {
+        color: $cor-primary;
+      }
+    }
+  }
 }
