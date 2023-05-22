@@ -16,7 +16,7 @@ import { ValorFaturaComponent } from './Components/valor-fatura/valor-fatura.com
 import { PagamentoComponent } from './Components/View/pagamento/pagamento.component';
 import { InputComponent } from './Components/input/input.component';
 import { TypePayComponent } from './Components/type-pay/type-pay.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -40,7 +40,8 @@ import { HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
