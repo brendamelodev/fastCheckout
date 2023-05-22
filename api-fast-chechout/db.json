@@ -1,0 +1,92 @@
+{
+    "contract-account": [
+        {
+            "uc": 160973,
+            "contract": "987654321",
+            "partnerNumber": "123456789",
+            "installation": "ABC123",
+            "number": "4567890",
+            "dv": "82",
+            "idUnidade": 23,
+            "idCidade": 82,
+            "document": "50534050425",
+            "address": "Rua das Flores, 123"
+        }
+    ],
+    "invoices": [
+        {
+            "invoiceId": "7114968",
+            "amount": 444.76,
+            "dueDate": "30/05/2023",
+            "barCodeOne": "826400000046447616712025305300101600973202305064",
+            "barCodeTwo": "83670000012345678901234567890123456789012345",
+            "street": "Rua das Flores, 123",
+            "complement": "Apartamento 456",
+            "district": "Centro",
+            "zipcode": "12345-678",
+            "status": "Em aberto",
+            "accountContractId": "987654321",
+            "fidic": "12345678",
+            "retention": "N/A",
+            "retentionMessage": null,
+            "reference": "Ref-123",
+            "isAutomaticDebt": false
+        },
+        {
+            "invoiceId": "5834982",
+            "amount": 455.99,
+            "dueDate": "28/01/2023",
+            "barCodeOne": "826000000040559916712024301280101603973202301063",
+            "barCodeTwo": "XXXXXXXXXXXXXXXXXXXX",
+            "street": "Nome da Rua",
+            "complement": "Complemento do endereço",
+            "district": "Bairro",
+            "zipcode": "CEP",
+            "status": "Status da fatura",
+            "accountContractId": "ID do contrato da conta",
+            "fidic": "FIDIC",
+            "retention": "Retention",
+            "retentionMessage": "Mensagem de retenção",
+            "reference": "Referência",
+            "isAutomaticDebt": false
+        }
+    ],
+    "installments": {
+        "1": 810.51,
+        "2": 419.44,
+        "3": 288.81,
+        "4": 223.96,
+        "5": 185.47,
+        "6": 160.19,
+        "7": 142.5,
+        "8": 129.59,
+        "9": 119.9,
+        "10": 112.51,
+        "11": 106.84,
+        "12": 102.5,
+        "13": 99.25,
+        "14": 96.9,
+        "15": 95.34,
+        "16": 94.51,
+        "17": 94.36,
+        "18": 94.88,
+        "19": 96.11,
+        "20": 98.1,
+        "21": 100.93
+    },
+    "payment": [
+        {
+            "installments": "21",
+            "amount": 1674.33,
+            "payment_module": 18,
+            "card_request": {
+                "card_number": "5151515151551515",
+                "holder": "teste",
+                "brand": "MASTER",
+                "expiration_date": "10/2029",
+                "security_code": "123"
+            },
+            "id": "1"
+        }
+    ]
+}
