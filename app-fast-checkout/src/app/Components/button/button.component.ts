@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-  @Input() dynamicRouteNext!: string;
+  @Input() dynamicRouteNext?: string;
   @Input() dynamicRouteBack!: string;
   @Input() dynamicRoutePay!: string;
   @Input() btnNext!: string;
