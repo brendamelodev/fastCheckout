@@ -6,15 +6,11 @@
         <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form>
-        <!-- <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="txt">
-          <label class="input-label-composto" for="floatingInput">DIGITE O NOME DA CIDADE <i
-              class="bi bi-search"></i></label>
-        </div> -->
-        <app-input [inputType]="'text'" [placeholderText]="'digite o nome da cidade'"></app-input>
-        <app-input [inputType]="'text'" [placeholderText]="'digite o cpf / cnpj do titular'"></app-input>
+        <app-input [inputType]="'text'" [placeholderText]="'digite seu cpf'" #input></app-input>
+        <!-- <app-input [inputType]="'text'" [placeholderText]="'digite o número do contrato'" formControlName="contract"></app-input> -->
 
-        <app-button [btnNext]="'btnNext'" [dynamicRouteNext]="'/idClienteInstalacao'"></app-button>
+        <!-- <app-button [btnNext]="'btnNext'" [dynamicRouteNext]="'/idClienteInstalacao'" (click)="getinputValue()"></app-button> -->
+        <app-button [btnNext]="'btnNext'" (click)="getinputValue()"></app-button>
       </form>
     </div>
   </div>
