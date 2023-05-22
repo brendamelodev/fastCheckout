@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -8,5 +9,11 @@ import { Component, Input } from '@angular/core';
 export class InputComponent {
   @Input() inputType!: string;
   @Input() placeholderText!: string;
+  @Input() document!: any;
+  @Output() valueEmitter: EventEmitter<string> = new EventEmitter<string>();
+  inputValue: any;
 
+  emitValue() {
+    this.valueEmitter.emit(this.inputValue);
+  }
 }

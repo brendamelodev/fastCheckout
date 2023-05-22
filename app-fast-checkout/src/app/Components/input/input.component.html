@@ -1,2 +1,1 @@
-<input class="my-2" [type]="inputType" [placeholder]="placeholderText">
-
+<input class="my-2" [type]="inputType" [placeholder]="placeholderText" [(ngModel)]="inputValue" (ngModelChange)="emitValue()" >
