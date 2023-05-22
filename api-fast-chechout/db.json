@@ -10,14 +10,15 @@
             "idUnidade": 23,
             "idCidade": 82,
             "document": "50534050425",
-            "address": "Rua das Flores, 123"
+            "address": "Rua das Flores, 123",
+            "name":"Victor Ferraz Oliveira"
         }
     ],
     "invoices": [
         {
             "invoiceId": "7114968",
             "amount": 444.76,
-            "dueDate": "30/05/2023",
+            "dueDate": "2023-05-12T17:52:17-05:00",
             "barCodeOne": "826400000046447616712025305300101600973202305064",
             "barCodeTwo": "83670000012345678901234567890123456789012345",
             "street": "Rua das Flores, 123",
@@ -35,7 +36,7 @@
         {
             "invoiceId": "5834982",
             "amount": 455.99,
-            "dueDate": "28/01/2023",
+            "dueDate": "2023-04-30T02:13:58-10:00",
             "barCodeOne": "826000000040559916712024301280101603973202301063",
             "barCodeTwo": "XXXXXXXXXXXXXXXXXXXX",
             "street": "Nome da Rua",
@@ -51,6 +52,7 @@
             "isAutomaticDebt": false
         }
     ],
+
     "installments": {
         "1": 810.51,
         "2": 419.44,
@@ -74,6 +76,7 @@
         "20": 98.1,
         "21": 100.93
     },
+
     "payment": [
         {
             "installments": "21",
