@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class ButtonComponent {
   @Input() dynamicRouteNext?: string;
-  @Input() dynamicRouteBack!: string;
-  @Input() dynamicRoutePay!: string;
+  @Input() dynamicRouteBack?: string;
+  @Input() dynamicRoutePay?: string;
   @Input() btnNext!: string;
   @Input() btnBack!: string;
   @Input() btnPay!: string;
