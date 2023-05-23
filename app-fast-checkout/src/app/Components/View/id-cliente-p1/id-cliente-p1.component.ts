@@ -1,7 +1,6 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/Service/api.service';
-import { InputComponent } from '../../input/input.component';
 
 @Component({
   selector: 'app-id-cliente-p1',

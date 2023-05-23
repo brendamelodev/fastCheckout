@@ -1,16 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col box d-flex flex-column justify-content-evenly mt-2">
-      <app-paginator [numeracao]="'1-3'" [txtPaginator]="'Identificação do Cliente'"></app-paginator>
+      <app-paginator numeracao="1-3" [txtPaginator]="'Identificação do Cliente'"></app-paginator>
       <div class="d-flex">
         <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form [formGroup]="form">
-        <app-input [inputType]="'text'" [placeholderText]="'digite seu cpf'" formControlName="document"></app-input>
-        <app-input [inputType]="'number'" [placeholderText]="'digite o número do contrato'"
-          formControlName="contract"></app-input>
+        <app-input inputType="text" placeholderText="digite seu cpf" formControlName="document" mask="000.000.000-00"></app-input>
+        <app-input inputType="text" placeholderText="digite o número do contrato" formControlName="contract" mask="000000000"></app-input>
 
-        <app-button [btnNext]="'btnNext'" (click)="getInputValue()"></app-button>
+        <app-button btnNext="btnNext" (click)="getInputValue()"></app-button>
       </form>
     </div>
   </div>

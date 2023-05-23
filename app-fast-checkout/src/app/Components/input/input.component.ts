@@ -17,6 +17,7 @@ const INPUT_FIELD_VALUE_ACESSOR: any = {
 export class InputComponent implements ControlValueAccessor {
   @Input() inputType!: string;
   @Input() placeholderText!: string;
+  @Input() mask?: string;
   private innerValue: any;
   control!: FormControl;
 
