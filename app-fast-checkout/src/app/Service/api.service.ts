@@ -13,15 +13,9 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getContractAccount(document: string): Observable<any> {
-    const params = new HttpParams().set("contract", document);
+    const params = new HttpParams().set("document", document);
     return this.http.get<any>(this.urlContract, { params })
   }
-  // getContractAccount(document: string): Observable<any> {
-  //   const params = new HttpParams().set("contract", document);
-  //   return this.http.get<any>(this.urlContract, { params }).pipe(
-  //     tap((retorno) => console.log(retorno))
-  //   )
-  // }
 
   getInvoices() {
     return this.http.get<any>('http://localhost:3001/invoices');

@@ -16,11 +16,12 @@ export class IdClienteP1Component {
     contract: ['', Validators.required]
   });
 
-  getInputValue() {
-    console.log(this.form.value);
-  }
-
-  getContractAccount(data: any) {
-    this.apiService.getContractAccount(data).subscribe((data) => console.log(data))
+  getContractAccount() {
+    if (this.form.valid) {
+      this.apiService.getContractAccount(this.form.value['document']).subscribe((data) => console.log(data))
+    }
+    else {
+      console.log("deu ruim");
+    }
   }
 }
