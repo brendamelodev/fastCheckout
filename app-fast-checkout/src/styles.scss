@@ -6,6 +6,7 @@ $cor-secondary: #4D4F5C;
 $cor-warning: #FFD63E;
 $cor-sucess: #27AE60;
 $cor-light: #FFFFFF;
+$cor-danger: #DC3545;
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -39,4 +40,27 @@ $cor-light: #FFFFFF;
 
 .txt-small {
   font-size: 0.75rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid rgba($cor-secondary, 0.4);
+  border-radius: 8px;
+  background: transparent;
+
+  &::placeholder {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: $cor-secondary;
+    opacity: 60%;
+  }
+}
+
+.span {
+  font-size: 0.9rem;
+  padding-left: 1rem;
+
+  color: $cor-danger;
 }

@@ -6,12 +6,22 @@
         <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form [formGroup]="form">
-        <app-input inputType="text" placeholderText="digite seu cpf" formControlName="document" mask="000.000.000-00"></app-input>
-        <span class="alerta text-danger">*cpf obrigatório</span>
-        <app-input inputType="text" placeholderText="digite o número do contrato" formControlName="contract" mask="000000000"></app-input>
+        <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00">
+        <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf obrigatório</span>
 
-        <app-button btnNext="btnNext" (click)="getContractAccount()"></app-button>
+        <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract" mask="000000000">
+        <span class="span" *ngIf="form.controls['contract'].invalid && form.controls['contract'].touched">*contrato obrigatório</span>
+
+        <!--
+          <app-input inputType="text" placeholderText="digite seu cpf" formControlName="document" mask="000.000.000-00"></app-input>
+          <app-input inputType="text" placeholderText="digite o número do contrato" formControlName="contract" mask="000000000"></app-input>
+        -->
+
+        <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button>
       </form>
+      <div class="d-flex justify-content-center">
+        <span class="text-danger" *ngIf="msgErro">{{ msgErro }}</span>
+      </div>
     </div>
   </div>
 </div>

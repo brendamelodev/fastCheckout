@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EMPTY, Subscription, catchError, map } from 'rxjs';
+import { ContractAccount } from 'src/app/Models/interfaces';
 import { ApiService } from 'src/app/Service/api.service';
 
 @Component({
@@ -8,20 +10,46 @@ import { ApiService } from 'src/app/Service/api.service';
   styleUrls: ['./id-cliente-p1.component.scss']
 })
 export class IdClienteP1Component {
+  contractAccount!: ContractAccount;
+  subscription?: Subscription;
+  msgErro = '';
 
   constructor(private apiService: ApiService, private fb: FormBuilder) { }
 
   form: FormGroup = this.fb.group({
-    document: ['', Validators.required],
-    contract: ['', Validators.required]
+    document: ['', [Validators.required, Validators.minLength(11)]],
+    contract: ['', [Validators.required, Validators.minLength(9)]]
   });
 
   getContractAccount() {
     if (this.form.valid) {
-      this.apiService.getContractAccount(this.form.value['document']).subscribe((data) => console.log(data))
-    }
-    else {
-      console.log("deu ruim");
+      this.subscription = this.apiService.getContractAccount(this.form.value['contract'], this.form.value['document'])
+        .pipe(
+          catchError(() => {
+            this.msgErro = 'Ops, ocorreu um erro.'
+            return EMPTY
+          })
+        )
+        .subscribe(
+          {
+            // next: data => this.contractAccount = data
+            next: data => {
+              if (Object.keys(data).length === 0) {
+                this.msgErro = 'Ops, ocorreu um erro. Seu cadastro não foi encontrado!';
+              } else {
+                this.contractAccount = data;
+                console.log("PEGOU "+this.contractAccount);
+              }
+            }
+          });
     }
   }
+
+  unsubscribe() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = undefined;
+    }
+  }
+
 }

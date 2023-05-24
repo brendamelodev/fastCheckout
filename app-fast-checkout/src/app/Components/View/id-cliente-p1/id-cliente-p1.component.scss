@@ -8,27 +8,3 @@
   margin: auto;
   width: 12rem;
 }
-
-.input-label-composto {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
-  color: rgba($cor-secondary, 0.5);
-
-  i {
-    color: $cor-primary;
-    font-size: 1.5rem;
-    opacity: 100%;
-  }
-}
-
-.form-control {
-  height: 3rem;
-}
-
-.alerta {
-  font-size: 0.8rem;
-  padding-left: 0.5rem;
-}
