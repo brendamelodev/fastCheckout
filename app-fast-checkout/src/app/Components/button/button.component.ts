@@ -13,6 +13,7 @@ export class ButtonComponent {
   @Input() btnNext!: string;
   @Input() btnBack!: string;
   @Input() btnPay!: string;
+  @Input() disabled = false;
 
   constructor() { }
 }
