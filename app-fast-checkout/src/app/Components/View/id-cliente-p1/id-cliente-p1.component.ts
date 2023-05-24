@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError, map } from 'rxjs';
 import { ContractAccount } from 'src/app/Models/interfaces';
 import { ApiService } from 'src/app/Service/api.service';
+import { DataService } from 'src/app/Service/data.service';
 
 @Component({
   selector: 'app-id-cliente-p1',
@@ -14,7 +16,7 @@ export class IdClienteP1Component {
   subscription?: Subscription;
   msgErro = '';
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) { }
+  constructor(private apiService: ApiService, private fb: FormBuilder, private router: Router, private dataService: DataService) { }
 
   form: FormGroup = this.fb.group({
     document: ['', [Validators.required, Validators.minLength(11)]],
@@ -38,10 +40,12 @@ export class IdClienteP1Component {
                 this.msgErro = 'Ops, ocorreu um erro. Seu cadastro não foi encontrado!';
               } else {
                 this.contractAccount = data;
-                console.log("PEGOU "+this.contractAccount);
+                this.dataService.setData(data);
               }
             }
-          });
+          }
+        );
+      this.router.navigateByUrl('/idClienteInstalacao');
     }
   }
 
