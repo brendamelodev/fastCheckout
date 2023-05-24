@@ -1,15 +1,22 @@
 <div class="container background d-flex flex-column p-3 my-2 rounded-2" [routerLink]="[routeCDC]">
     <div class="row d-flex align-items-center">
       <div class="col-8">
-        <p class="txt-contrast">7013335308</p>
+        <p class="txt-contrast">
+          <ng-content select="[accountContractId]"></ng-content>
+        </p>
       </div>
       <div class="col-4 d-flex justify-content-end">
-        <p id="buttonNumber">123.•••.789-00</p>
+        <p id="buttonNumber">
+          <ng-content select="[document]"></ng-content>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <p class="txt-small"><b>Endereço:</b> ••• Viagem, Recife - PE, 51•••-300</p>
+        <p class="txt-small">
+          <b>Endereço:</b>
+          <ng-content select="[address]"></ng-content>
+        </p>
       </div>
     </div>
 </div>
