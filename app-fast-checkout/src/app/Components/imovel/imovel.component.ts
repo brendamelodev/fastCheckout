@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./imovel.component.scss']
 })
 export class ImovelComponent {
-  @Input() routeCDC!: string;
+  @Input() routeCDC?: string;
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY, Subscription, catchError } from 'rxjs';
-import { ContractAccount, Invoice } from 'src/app/Models/interfaces';
+import { Subscription} from 'rxjs';
 import { ApiService } from 'src/app/Service/api.service';
 import { DataService } from 'src/app/Service/data.service';
 
@@ -15,6 +14,7 @@ export class IdClienteInstalacaoComponent implements OnInit {
   invoices!: any;
   subscription?: Subscription;
   msgErro = '';
+  invoiceId?: string;
 
   constructor(private dataService: DataService, private apiService: ApiService, private router: Router) { }
 
@@ -22,29 +22,12 @@ export class IdClienteInstalacaoComponent implements OnInit {
     this.dataService.dataAccountContract$.subscribe(data => {
       this.accountContract = data;
     });
-
     this.getInvoices();
   }
 
   getInvoices() {
-    this.subscription = this.apiService.getInvoices(this.accountContract)
-      .pipe(
-        catchError(() => {
-          this.msgErro = 'Ops, ocorreu um erro.'
-          return EMPTY
-        })
-      )
-      .subscribe(
-        {
-          next: data => {
-            if (Object.keys(data).length === 0) {
-              this.msgErro = 'Ops, ocorreu um erro. Seu cadastro não foi encontrado!';
-            } else {
-              this.invoices = data;
-            }
-          }
-        }
-      );
+    this.subscription = this.apiService.getInvoices(this.accountContract).subscribe(
+      { next: data => this.invoices = data });
   }
 
   unsubscribe() {
@@ -52,5 +35,11 @@ export class IdClienteInstalacaoComponent implements OnInit {
       this.subscription.unsubscribe();
       this.subscription = undefined;
     }
+  }
+
+  setsInvoiceId(data: any) {
+    this.invoiceId = data;
+    this.dataService.setInvoiceId(data);
+    this.router.navigateByUrl('/faturas');
   }
 }

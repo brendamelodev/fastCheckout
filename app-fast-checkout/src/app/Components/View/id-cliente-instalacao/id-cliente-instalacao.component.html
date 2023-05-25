@@ -18,12 +18,12 @@
   <div class="row">
     <div class="col pb-5" *ngIf="accountContract; else nenhumImovel">
       <div *ngFor="let data of invoices, let i = index">
-        <app-imovel routeCDC="/faturas">
+        <app-imovel (click)="setsInvoiceId(invoices[i].invoiceId)">
           <span accountContractId>{{ invoices[i].accountContractId }}</span>
           <span document>{{ accountContract[0].document | cpf }}</span>
-          <span address>{{ invoices[i].street | address }}, </span>
-          <span address>{{ invoices[i].district }}, </span>
-          <span address>{{ invoices[i].zipcode | cep }}</span>
+          <span address>
+            {{ invoices[i].street | address }}, {{ invoices[i].district }}, {{ invoices[i].zipcode | cep }}
+          </span>
         </app-imovel>
       </div>
     </div>
