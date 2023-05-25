@@ -40,7 +40,7 @@ export class IdClienteP1Component {
                 this.msgErro = 'Ops, ocorreu um erro. Seu cadastro não foi encontrado!';
               } else {
                 this.contractAccount = data;
-                this.dataService.setData(data);
+                this.dataService.setDataAccountContract(data);
               }
             }
           }
