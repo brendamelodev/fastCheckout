@@ -16,14 +16,21 @@
   </div>
 
   <div class="row">
-    <div class="col pb-5 ">
-      <app-imovel routeCDC="/faturas">
-        <span accountContractId>aosidoaisda</span>
-        <span document>123.•••.789-00</span>
-        <!-- <span address>{{ accountContractData.address }}</span> -->
-        <span address>••• Viagem, Recife - PE, 51•••-300</span>
-      </app-imovel>
+    <div class="col pb-5" *ngIf="accountContract; else nenhumImovel">
+      <div *ngFor="let data of invoices, let i = index">
+        <app-imovel routeCDC="/faturas">
+          <span accountContractId>{{ invoices[i].accountContractId }}</span>
+          <span document>{{ accountContract[0].document | cpf }}</span>
+          <span address>{{ invoices[i].street | address }}, </span>
+          <span address>{{ invoices[i].district }}, </span>
+          <span address>{{ invoices[i].zipcode | cep }}</span>
+        </app-imovel>
+      </div>
     </div>
+
+    <ng-template #nenhumImovel>
+      <span class="span text-center pb-4">Ops! Ocorreu um erro...</span>
+    </ng-template>
   </div>
 
   <app-button btnBack="btnBack" dynamicRouteBack="/home"></app-button>
