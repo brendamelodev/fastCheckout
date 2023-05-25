@@ -23,4 +23,9 @@ export class ApiService {
     const params = new HttpParams().set("contract", accountContractId);
     return this.http.get<Invoice>(this.urlInvoices, { params })
   }
+
+  getInvoiceById(invoiceId: string): Observable<Invoice> {
+    const params = new HttpParams().set("invoiceId", invoiceId);
+    return this.http.get<Invoice>(this.urlInvoices, { params })
+  }
 }
