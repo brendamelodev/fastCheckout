@@ -5,10 +5,16 @@
     </div>
     <div class="col-4 ps-0">
       <p class="txt-small-contrast">VALOR</p>
-      <p class="valor fw-bold">R$ 400,00</p>
+      <p class="valor fw-bold">
+        <!-- R$ 400,00 -->
+        <ng-content select="[amount]"></ng-content>
+      </p>
     </div>
     <div class="col-6 d-flex align-items-end justify-content-end">
-      <p class="txt-small-contrast pe-2">Vencimento 25/12/2021</p>
+      <p class="txt-small-contrast pe-2">
+        Vencimento
+        <ng-content select="[dueDate]"></ng-content>
+      </p>
     </div>
   </div>
 </div>
