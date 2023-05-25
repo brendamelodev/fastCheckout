@@ -5,7 +5,7 @@
   <div class="row d-flex align-items-center background p-3">
     <div class="col-3">
       <p>CDC/Ligação</p>
-      <p class="fw-bold">7013335308</p>
+      <p class="fw-bold text-center" *ngIf="invoiceById">{{invoiceById[0].invoiceId}}</p>
     </div>
     <div class="col-1">
       <div class="d-flex">
@@ -13,10 +13,12 @@
       </div>
     </div>
     <div class="col-8">
-      <p>Nome</p>
-      <p class="fw-bold">Rafael ••• da Silva</p>
-      <p>Endereço</p>
-      <p class="fw-bold">••• Viagem, Recife - PE, 51•••-300</p>
+      <p *ngIf="accountContract">Nome</p>
+      <p class="fw-bold" *ngIf="accountContract">{{ accountContract[0].name | name }}</p>
+      <p *ngIf="invoiceById">Endereço</p>
+      <p class="fw-bold" *ngIf="invoiceById">
+        {{ invoiceById[0].street | address }}, {{ invoiceById[0].district }}, {{ invoiceById[0].zipcode | cep }}
+      </p>
     </div>
   </div>
 
@@ -27,17 +29,12 @@
   </div>
 
   <div class="row background pb-3">
-    <div class="col pb-2 overflow-auto">
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
-      <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura>
+    <div class="col pb-2 overflow-auto" *ngIf="invoiceById">
+      <app-valor-fatura routeFatura="/pagamento">
+        <span amount>{{invoiceById[0].amount}}</span>
+        <span dueDate>{{invoiceById[0].dueDate | date: 'dd/MM/yyyy'}}</span>
+      </app-valor-fatura>
+      <!-- <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura> -->
     </div>
   </div>
 
