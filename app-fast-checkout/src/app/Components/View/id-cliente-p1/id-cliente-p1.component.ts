@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EMPTY, Subscription, catchError, map } from 'rxjs';
+import { EMPTY, Subscription, catchError } from 'rxjs';
 import { ContractAccount } from 'src/app/Models/interfaces';
 import { ApiService } from 'src/app/Service/api.service';
 import { DataService } from 'src/app/Service/data.service';
@@ -34,7 +34,6 @@ export class IdClienteP1Component {
         )
         .subscribe(
           {
-            // next: data => this.contractAccount = data
             next: data => {
               if (Object.keys(data).length === 0) {
                 this.msgErro = 'Ops, ocorreu um erro. Seu cadastro não foi encontrado!';

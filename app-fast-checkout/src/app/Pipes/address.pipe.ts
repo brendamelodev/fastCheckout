@@ -7,17 +7,19 @@ export class AddressPipe implements PipeTransform {
 
   transform(value: string): string {
     const ellipsisText = '•••';
-    const trimmedValue = value.trim();
-    const data = value.split(" ")
+    const addressSingle = value.trim().split(' ');
+    const addressParts = value.trim().split(', ');
 
-    if (trimmedValue.includes(',')) {
-      const parts = trimmedValue.split(',');
-      const lastPart = parts[parts.length - 1].trim();
-
-      return ellipsisText + ', ' + lastPart;
+    if (addressParts.length > 1) {
+      const lastPart = addressParts[addressParts.length - 1];
+      const meio = addressSingle[addressSingle.length - 2];
+      return `${ellipsisText} ${meio} ${lastPart}`;
+    }
+    if (addressSingle.length > 1) {
+      return `${ellipsisText} ${addressSingle[addressSingle.length - 1]}`;
     }
     else {
-      return ellipsisText + ' ' + data[2];
+      return value;
     }
   }
 
