@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { CpfPipe } from './Pipes/cpf.pipe';
 import { AddressPipe } from './Pipes/address.pipe';
 import { CepPipe } from './Pipes/cep.pipe';
+import { NamePipe } from './Pipes/name.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CepPipe } from './Pipes/cep.pipe';
     TypePayComponent,
     CpfPipe,
     AddressPipe,
-    CepPipe
+    CepPipe,
+    NamePipe
   ],
   imports: [
     BrowserModule,
