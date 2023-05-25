@@ -19,6 +19,10 @@ import { InputComponent } from './Components/input/input.component';
 import { TypePayComponent } from './Components/type-pay/type-pay.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { CpfPipe } from './Pipes/cpf.pipe';
+import { AddressPipe } from './Pipes/address.pipe';
+import { CepPipe } from './Pipes/cep.pipe';
 
 @NgModule({
   declarations: [
@@ -35,10 +39,14 @@ import { HttpClientModule} from '@angular/common/http';
     ValorFaturaComponent,
     PagamentoComponent,
     InputComponent,
-    TypePayComponent
+    TypePayComponent,
+    CpfPipe,
+    AddressPipe,
+    CepPipe
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
