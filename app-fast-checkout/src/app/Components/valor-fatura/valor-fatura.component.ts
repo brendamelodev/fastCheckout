@@ -6,6 +6,4 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./valor-fatura.component.scss']
 })
 export class ValorFaturaComponent {
-  @Input() routeFatura!: string;
-
 }

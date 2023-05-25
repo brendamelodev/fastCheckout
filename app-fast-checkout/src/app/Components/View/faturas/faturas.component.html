@@ -30,7 +30,7 @@
 
   <div class="row background pb-3">
     <div class="col pb-2 overflow-auto" *ngIf="invoiceById">
-      <app-valor-fatura routeFatura="/pagamento">
+      <app-valor-fatura>
         <span amount>{{invoiceById[0].amount}}</span>
         <span dueDate>{{invoiceById[0].dueDate | date: 'dd/MM/yyyy'}}</span>
       </app-valor-fatura>
