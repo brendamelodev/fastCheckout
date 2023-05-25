@@ -17,7 +17,7 @@ export class AddressPipe implements PipeTransform {
       return ellipsisText + ', ' + lastPart;
     }
     else {
-      return ellipsisText + ' ' + data[1] +data[2];
+      return ellipsisText + ' ' + data[2];
     }
   }
 
