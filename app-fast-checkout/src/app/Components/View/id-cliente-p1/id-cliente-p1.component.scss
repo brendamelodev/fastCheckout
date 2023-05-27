@@ -1,5 +1,10 @@
 @import 'src/styles.scss';
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .box {
   height: 50vh;
 }
@@ -7,4 +12,12 @@
 .btn-info {
   margin: auto;
   width: 12rem;
+}
+
+.btn-info {
+  font-weight: 400;
+
+  .bi-arrow-down-short {
+    font-size: 3rem;
+  }
 }

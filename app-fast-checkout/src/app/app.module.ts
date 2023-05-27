@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './Components/nav/nav.component';
 import { FooterComponent } from './Components/footer/footer.component';
-import { HomeComponent } from './Components/home/home.component';
 import { IdClienteP1Component } from './Components/View/id-cliente-p1/id-cliente-p1.component';
 import { ButtonComponent } from './Components/button/button.component';
 import { PaginatorComponent } from './Components/paginator/paginator.component';
@@ -30,7 +29,6 @@ import { NamePipe } from './Pipes/name.pipe';
     AppComponent,
     NavComponent,
     FooterComponent,
-    HomeComponent,
     IdClienteP1Component,
     ButtonComponent,
     PaginatorComponent,

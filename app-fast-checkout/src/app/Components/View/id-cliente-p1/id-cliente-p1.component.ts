@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,12 +17,16 @@ export class IdClienteP1Component {
   subscription?: Subscription;
   msgErro = '';
 
-  constructor(private apiService: ApiService, private fb: FormBuilder, private router: Router, private dataService: DataService) { }
+  constructor(private viewportScroller: ViewportScroller, private apiService: ApiService, private fb: FormBuilder, private router: Router, private dataService: DataService) { }
 
   form: FormGroup = this.fb.group({
     document: ['', [Validators.required, Validators.minLength(11)]],
     contract: ['', [Validators.required, Validators.minLength(9)]]
   });
+
+  scrollToDiv() {
+    this.viewportScroller.scrollToAnchor('componentRef');
+  }
 
   getContractAccount() {
     if (this.form.valid) {

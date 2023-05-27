@@ -1,21 +1,37 @@
 <div class="container">
+  <app-nav backgroundClass="background"></app-nav>
+
   <div class="row">
-    <div class="col box d-flex flex-column justify-content-evenly mt-2">
+    <div class="col background">
+      <div class="d-flex flex-column justify-content-evenly px-3 box gap-2">
+        <h1 class="txt-contrast fs-3 text-center lh-base">Seja bem-vindo (a) ao portal de pagamentos da BRK em parceiria
+          com a Flexpag!</h1>
+        <p>Aqui você pode pagar suas contas <b>em até 21x no Cartão de Crédito,</b> Cartão
+          Bolsa Família e PIX - de forma rápida,
+          simples e segura!</p>
+        <span type="button" class="btn-info align-self-end m-0" (click)="scrollToDiv()">
+          Iniciar
+          <i class="bi bi-arrow-down-short"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="componentRef">
+    <div class="col box d-flex flex-column justify-content-evenly mt-2 px-3">
       <app-paginator numeracao="1-3" [txtPaginator]="'Identificação do Cliente'"></app-paginator>
       <div class="d-flex">
         <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form [formGroup]="form">
         <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00">
-        <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf obrigatório</span>
+        <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
+          obrigatório</span>
 
-        <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract" mask="000000000">
-        <span class="span" *ngIf="form.controls['contract'].invalid && form.controls['contract'].touched">*contrato obrigatório</span>
-
-        <!--
-          <app-input inputType="text" placeholderText="digite seu cpf" formControlName="document" mask="000.000.000-00"></app-input>
-          <app-input inputType="text" placeholderText="digite o número do contrato" formControlName="contract" mask="000000000"></app-input>
-        -->
+        <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract"
+          mask="000000000">
+        <span class="span" *ngIf="form.controls['contract'].invalid && form.controls['contract'].touched">*contrato
+          obrigatório</span>
 
         <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button>
       </form>
@@ -24,4 +40,6 @@
       </div>
     </div>
   </div>
+
+  <app-footer></app-footer>
 </div>
