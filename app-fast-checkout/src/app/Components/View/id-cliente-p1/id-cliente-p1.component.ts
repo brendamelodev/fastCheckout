@@ -31,11 +31,11 @@ export class IdClienteP1Component {
   getContractAccount() {
     if (this.form.valid) {
       this.subscription = this.apiService.getContractAccount(this.form.value['contract'], this.form.value['document'])
-        .pipe(
-          catchError(() => {
-            this.msgErro = 'Ops, ocorreu um erro.'
-            return EMPTY
-          })
+      .pipe(
+        catchError(() => {
+          this.msgErro = 'Ops, ocorreu um erro.'
+          return EMPTY
+        })
         )
         .subscribe(
           {
@@ -45,11 +45,11 @@ export class IdClienteP1Component {
               } else {
                 this.contractAccount = data;
                 this.dataService.setDataAccountContract(data);
+                this.router.navigate(['idClienteInstalacao']);
               }
             }
           }
         );
-      this.router.navigate(['idClienteInstalacao']);
     }
   }
 
@@ -58,6 +58,10 @@ export class IdClienteP1Component {
       this.subscription.unsubscribe();
       this.subscription = undefined;
     }
+  }
+
+  clearMsgErro() {
+    this.msgErro = '';
   }
 
 }

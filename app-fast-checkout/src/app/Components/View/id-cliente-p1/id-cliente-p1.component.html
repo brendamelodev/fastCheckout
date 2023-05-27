@@ -24,12 +24,12 @@
         <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form [formGroup]="form">
-        <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00">
+        <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00" (input)="clearMsgErro()">
         <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
           obrigatório</span>
 
         <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract"
-          mask="000000000">
+          mask="000000000" (input)="clearMsgErro()">
         <span class="span" *ngIf="form.controls['contract'].invalid && form.controls['contract'].touched">*contrato
           obrigatório</span>
 
