@@ -68,6 +68,8 @@ export class FaturasComponent implements OnInit {
   }
 
   get totalAmount(): number {
-    return this.selectedInvoices.reduce((total, invoice) => total + invoice.amount, 0);
+    const amount = this.selectedInvoices.reduce((total, invoice) => total + invoice.amount, 0);
+    this.dataService.setTotalAmount(amount);
+    return amount;
   }
 }
