@@ -1,17 +1,17 @@
-<div class="container-fluid background px-4 py-5">
+<div class="container-fluid background px-2 py-5" *ngIf="!isFull; else footerTemplate">
   <div class="row">
-    <div class="col-4">
-      <p>Powered by</p>
+    <div class="col-3">
+      <p class="txt-small">Powered by</p>
     </div>
-    <div class="col-8">
+    <div class="col-9 p-0">
       <img img-fluid src="https://flexpag.com/wp-content/uploads/2022/12/logo-flexpag-_COLORIDO-simples.png" alt="Logo Flexpag">
     </div>
   </div>
   <div class="row pt-3">
-    <div class="col-4">
-      <p>Certificados e Segurança</p>
+    <div class="col-3">
+      <p class="txt-small">Certificados e Segurança</p>
     </div>
-    <div class="col-8 d-flex flex-wrap justify-content-center gap-2">
+    <div class="col-9 d-flex flex-wrap justify-content-center gap-2 p-0">
       <img img-fluid src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Trustwave.png" alt="Logo Trustwave">
       <img img-fluid src="https://www2.cip-bancos.org.br/InovaCIP/SiteAssets/images/cip-logo.png" alt="Logo Cip">
       <img img-fluid src="https://static.wixstatic.com/media/563f21_719d71e7e8954560a12af1153a990c1e~mv2.png/v1/fill/w_420,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/pci-dss.png" alt="Logo PCI DSS">
@@ -20,3 +20,34 @@
     </div>
   </div>
 </div>
+
+<ng-template #footerTemplate>
+  <div class="container-fluid background px-2 py-4">
+    <div class="row">
+      <div class="col-3">
+        <p class="txt-small">Powered by</p>
+      </div>
+      <div class="col-9 p-0">
+        <img img-fluid src="https://flexpag.com/wp-content/uploads/2022/12/logo-flexpag-_COLORIDO-simples.png" alt="Logo Flexpag">
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-3">
+        <p class="txt-small">Certificados e Segurança</p>
+      </div>
+      <div class="col-9 d-flex flex-wrap justify-content-center gap-2 p-0">
+        <img img-fluid src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Trustwave.png" alt="Logo Trustwave">
+        <img img-fluid src="https://www2.cip-bancos.org.br/InovaCIP/SiteAssets/images/cip-logo.png" alt="Logo Cip">
+        <img img-fluid src="https://static.wixstatic.com/media/563f21_719d71e7e8954560a12af1153a990c1e~mv2.png/v1/fill/w_420,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/pci-dss.png" alt="Logo PCI DSS">
+        <img img-fluid src="https://paydock.com/wp-content/uploads/2020/09/cybersource-800x450-1.png" alt="Logo CyberSource">
+        <img img-fluid src="https://63228.cdn.simplo7.net/static/63228/configuracao/165670679322498.png" alt="Logo Clearsale">
+      </div>
+    </div>
+    <div class="row gap-3">
+      <p class="txt-small pb-2">CNPJ: 04.870.413/0001-88</p>
+      <p class="txt-small">Tem alguma dúvida ou precisa nos contar alguma coisa? Fique a vontade para nos enviar um e-mail.</p>
+      <p class="txt-small fw-bold">contato@flexpag.com</p>
+      <p id="parcelas" class="txt-small">Estamos disponíveis sempre dentro do horário comercial.</p>
+    </div>
+  </div>
+</ng-template>
