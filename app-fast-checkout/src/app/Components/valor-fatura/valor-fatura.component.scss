@@ -13,12 +13,3 @@
   color: $cor-secondary;
   font-weight: 700;
 }
-
-.bi-check-circle {
-  display: flex;
-  font-size: 2rem;
-  color: $cor-primary;
-  &::before {
-    font-weight: bold !important;
-  }
-}
