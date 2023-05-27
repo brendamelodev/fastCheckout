@@ -49,7 +49,7 @@ export class IdClienteP1Component {
             }
           }
         );
-      this.router.navigateByUrl('/idClienteInstalacao');
+      this.router.navigate(['idClienteInstalacao']);
     }
   }
 
