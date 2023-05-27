@@ -30,21 +30,21 @@
 
   <div class="row background pb-3">
     <div class="col pb-2 overflow-auto" *ngIf="invoiceById">
-      <app-valor-fatura>
+      <app-valor-fatura (click)="toggleInvoiceSelection(invoiceById[0])">
+        <i icon class="bi" [ngClass]="invoiceById[0].selected ? 'bi-check-circle' : 'bi-circle'"></i>
         <span amount>{{invoiceById[0].amount}}</span>
         <span dueDate>{{invoiceById[0].dueDate | date: 'dd/MM/yyyy'}}</span>
       </app-valor-fatura>
-      <!-- <app-valor-fatura routeFatura="/pagamento"></app-valor-fatura> -->
     </div>
   </div>
 
   <div class="row background mb-4">
     <div class="col pb-2">
-      <span class="btnSelect">Desmarcar todos</span>
+      <span class="btnSelect" (click)="toggleAllInvoiceSelection()">{{ btnSelectText }}</span>
     </div>
     <div class="col pb-4 d-flex flex-column align-items-end justify-content-start gap-1">
       <p class="m-0">Valor total das faturas</p>
-      <p class="fw-bold m-0 fs-6">R$ 2.200,00</p>
+      <p class="fw-bold m-0 fs-6">R$ {{ totalAmount.toFixed(2) }}</p>
     </div>
   </div>
 

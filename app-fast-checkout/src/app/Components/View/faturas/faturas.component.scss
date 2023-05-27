@@ -24,6 +24,16 @@ p {
   color: $cor-primary;
 }
 
-.overflow-auto{
+.overflow-auto {
   max-height: 25rem;
+}
+
+.bi-check-circle, .bi-circle {
+  display: flex;
+  font-size: 2rem;
+  color: $cor-primary;
+
+  &::before {
+    font-weight: bold !important;
+  }
 }
