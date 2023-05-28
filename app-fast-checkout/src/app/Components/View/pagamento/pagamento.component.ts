@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ApiService } from 'src/app/Service/api.service';
 import { DataService } from 'src/app/Service/data.service';
 
 @Component({
@@ -8,17 +10,20 @@ import { DataService } from 'src/app/Service/data.service';
   styleUrls: ['./pagamento.component.scss']
 })
 export class PagamentoComponent implements OnInit{
+  subscription?: Subscription;
   selectedPaymentType: string = 'Cartão de Crédito';
   accountContract!: any;
   invoiceById?: any;
   totalAmount: number = 0;
+  installments?: any;
+  selectedInstallment: any;
   paymentTypes = [
     { classIcon: 'bi bi-credit-card', type: 'Cartão de Crédito', description: 'Em até 21 vezes' },
     { classIcon: 'bi bi-cash-coin', type: 'Cartão de Débito Virtual Caixa', description: 'Bolsa Família' },
     { classIcon: 'bi bi-x-diamond-fill', type: 'Pagamento Instantâneo', description: 'PIX' }
   ];
 
-  constructor(private dataService: DataService, private fb: FormBuilder) { }
+  constructor(private dataService: DataService, private fb: FormBuilder, private apiService: ApiService) { }
 
   form: FormGroup = this.fb.group({
     cartao: ['', [Validators.required, Validators.minLength(11)]],
@@ -34,6 +39,7 @@ export class PagamentoComponent implements OnInit{
     this.dataService.dataAccountContract$.subscribe(data => {
       this.accountContract = data;
     });
+    this.getInstallments();
   }
 
   selectPaymentType(type: string) {
@@ -68,4 +74,24 @@ export class PagamentoComponent implements OnInit{
     return description;
   }
 
+  getInstallments() {
+    this.subscription = this.apiService.getInstallments().subscribe(
+      { next: data => this.installments = data
+      });
+  }
+
+  unsubscribe() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = undefined;
+    }
+  }
+
+  updateSelectedInstallment(value: any, key: any) {
+    this.selectedInstallment = { key, value };
+  }
+
+  sortedKeys(obj: any): string[] {
+    return Object.keys(obj).sort((a, b) => parseInt(a) - parseInt(b));
+  }
 }
