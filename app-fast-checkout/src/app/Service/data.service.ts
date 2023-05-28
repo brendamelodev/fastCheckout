@@ -10,9 +10,9 @@ export class DataService {
   private invoiceId?: string;
   private totalAmount: number = 0;
   // Cria um objeto observável que compartilha os dados entre os componentes
-  private dataAccountContract = new BehaviorSubject<any>(null);
+  private dataAccountContractSubject = new BehaviorSubject<any>(null);
   // Cria um Observable somente leitura para os componentes se inscreverem
-  public dataAccountContract$ = this.dataAccountContract.asObservable();
+  public dataAccountContract$ = this.dataAccountContractSubject.asObservable();
 
   constructor() { }
 
@@ -46,7 +46,7 @@ export class DataService {
 
   // Define um método para atualizar os dados do objeto observável
   setDataAccountContract(data: any) {
-    this.dataAccountContract.next(data);
+    this.dataAccountContractSubject.next(data);
     this.setAccountContract(data);
   }
 }
