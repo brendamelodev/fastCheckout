@@ -17,12 +17,14 @@ import { PagamentoComponent } from './Components/View/pagamento/pagamento.compon
 import { InputComponent } from './Components/input/input.component';
 import { TypePayComponent } from './Components/type-pay/type-pay.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CpfPipe } from './Pipes/cpf.pipe';
 import { AddressPipe } from './Pipes/address.pipe';
 import { CepPipe } from './Pipes/cep.pipe';
 import { NamePipe } from './Pipes/name.pipe';
+import { LoadingComponent } from './Components/loading/loading.component';
+import { LoadingInterceptor } from './Interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { NamePipe } from './Pipes/name.pipe';
     CpfPipe,
     AddressPipe,
     CepPipe,
-    NamePipe
+    NamePipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,13 @@ import { NamePipe } from './Pipes/name.pipe';
     NgxMaskDirective,
     NgxMaskPipe
   ],
-  providers: [ provideNgxMask() ],
+  providers: [ provideNgxMask(),
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,17 @@
+@import 'src/styles.scss';
+
+.loading {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  .spinner-border {
+    width: 7rem;
+    height: 7rem;
+    color: $cor-primary;
+    --bs-spinner-border-width: 0.5em;
+  }
+}
