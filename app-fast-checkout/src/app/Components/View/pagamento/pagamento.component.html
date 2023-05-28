@@ -5,7 +5,7 @@
   <div class="row d-flex align-items-center">
     <div class="col-5">
       <p class="txt-small text-uppercase">cpf</p>
-      <p class="fs-6 txt-contrast">123.456.789-00</p>
+      <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
     </div>
     <div class="col-1 p-0">
       <div class="d-flex">
@@ -14,7 +14,7 @@
     </div>
     <div class="col-6">
       <p class="txt-small text-uppercase">código do cliente</p>
-      <p class="fs-6 txt-contrast">11111111111</p>
+      <p class="fs-6 txt-contrast" *ngIf="invoiceById">{{invoiceById[0].invoiceId}}</p>
     </div>
   </div>
 
@@ -52,14 +52,20 @@
   <div *ngIf="selectedPaymentType === 'Cartão de Crédito'">
     <div class="row">
       <p class="txt-contrast pb-2">Dados do cartão de crédito</p>
-      <form>
-        <app-input inputType="number" placeholderText="número do cartão"></app-input>
-        <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input>
+      <form [formGroup]="form">
+        <input class="input" type="text" placeholder="número do cartão" formControlName="cartao"
+          mask="000.000.000-00">
+        <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao"
+          mask="000000000">
         <div class="d-flex gap-2">
-          <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input>
-          <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input>
+          <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="000000000">
+          <input class="input" type="text" placeholder="cvc" formControlName="cvc" mask="000000000">
         </div>
-        <app-input inputType="number" placeholderText="cep do endereço de cobrança"></app-input>
+        <input class="input" type="text" placeholder="cep do endereço de cobrança" formControlName="cep"
+          mask="000000000">
+
+        <!-- <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
+            obrigatório</span> -->
       </form>
     </div>
 
@@ -197,6 +203,8 @@
 
   <div class="row background-light">
     <app-button btnPay="btnPay" dynamicRoutePay="/"></app-button>
+    <!-- <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button> -->
+
     <app-button btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
   </div>
 

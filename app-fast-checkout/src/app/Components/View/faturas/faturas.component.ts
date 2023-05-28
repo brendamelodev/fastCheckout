@@ -31,6 +31,7 @@ export class FaturasComponent implements OnInit {
         {
           next: data => {
             this.invoiceById = data; console.log(data);
+            this.dataService.setInvoiceById(data);
           }
         });
     }

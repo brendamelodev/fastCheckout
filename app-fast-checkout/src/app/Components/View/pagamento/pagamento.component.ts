@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/Service/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/Service/data.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { DataService } from 'src/app/Service/data.service';
 })
 export class PagamentoComponent implements OnInit{
   selectedPaymentType: string = 'Cartão de Crédito';
+  accountContract!: any;
+  invoiceById?: any;
   totalAmount: number = 0;
   paymentTypes = [
     { classIcon: 'bi bi-credit-card', type: 'Cartão de Crédito', description: 'Em até 21 vezes' },
@@ -16,10 +18,22 @@ export class PagamentoComponent implements OnInit{
     { classIcon: 'bi bi-x-diamond-fill', type: 'Pagamento Instantâneo', description: 'PIX' }
   ];
 
-  constructor(private dataService: DataService, private apiService: ApiService) { }
+  constructor(private dataService: DataService, private fb: FormBuilder) { }
+
+  form: FormGroup = this.fb.group({
+    cartao: ['', [Validators.required, Validators.minLength(11)]],
+    nameCartao: ['', [Validators.required, Validators.minLength(9)]],
+    validade: ['', Validators.required],
+    cvc: ['', Validators.required],
+    cep: ['', Validators.required]
+  });
 
   ngOnInit() {
     this.totalAmount = this.dataService.getTotalAmount();
+    this.invoiceById = this.dataService.getInvoiceById();
+    this.dataService.dataAccountContract$.subscribe(data => {
+      this.accountContract = data;
+    });
   }
 
   selectPaymentType(type: string) {
