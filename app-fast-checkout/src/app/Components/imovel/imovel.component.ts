@@ -6,4 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./imovel.component.scss']
 })
 export class ImovelComponent {
+  @Input() bg!: string;
 }

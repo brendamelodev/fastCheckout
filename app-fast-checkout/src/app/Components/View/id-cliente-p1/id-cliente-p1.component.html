@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<!-- MOBILE -->
+<div class="container-fluid d-sm-block d-md-none">
   <app-nav backgroundClass="background"></app-nav>
 
   <div class="row">
@@ -24,7 +25,8 @@
         <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form [formGroup]="form">
-        <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00" (input)="clearMsgErro()">
+        <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00"
+          (input)="clearMsgErro()">
         <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
           obrigatório</span>
 
@@ -36,10 +38,72 @@
         <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button>
       </form>
       <div class="d-flex justify-content-center">
-        <span class="text-danger" *ngIf="msgErro">{{ msgErro }}</span>
+        <span class="text-danger text-center" *ngIf="msgErro">{{ msgErro }}</span>
       </div>
     </div>
   </div>
 
-  <app-footer [isFull]="false"></app-footer>
+  <app-footer [model]="'mobileFooter'"></app-footer>
+</div>
+
+<!-- DESKTOP -->
+<div class="container-fluid d-none d-md-block">
+  <app-nav [isDesktop]="true"></app-nav>
+
+  <div class="row vh-100">
+    <div class="col-4">
+      <app-step [step]="1"></app-step>
+    </div>
+
+    <div class="col-4 background d-flex rounded-3">
+      <div class="d-flex flex-column justify-content-evenly content">
+        <div class="d-flex flex-column gap-3">
+          <h1 class="txt-contrast fs-3 text-center lh-base">Seja bem-vindo (a) ao portal de pagamentos da BRK em
+            parceiria
+            com a Flexpag!</h1>
+          <p>Aqui você pode pagar suas contas <b>em até 21x no Cartão de Crédito,</b> Cartão
+            Bolsa Família e PIX - de forma rápida,
+            simples e segura!
+          </p>
+        </div>
+
+        <hr class="w-75 align-self-center opacity-25">
+
+        <form [formGroup]="form" class="d-flex flex-column gap-2">
+          <span class="btn-info my-0">CPF/CNPJ</span>
+          <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00"
+            (input)="clearMsgErro()">
+          <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
+            obrigatório</span>
+          <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract"
+            mask="000000000" (input)="clearMsgErro()">
+          <span class="span" *ngIf="form.controls['contract'].invalid && form.controls['contract'].touched">*contrato
+            obrigatório</span>
+          <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button>
+        </form>
+
+        <div class="text-center suporte">
+          <p class="fw-bold">Tem alguma dúvida ou precisa de suporte?</p>
+          <p class="fw-bold">Conte com a equipe da Flexpag! É só nos chamar!</p>
+          <div class="d-flex justify-content-around pt-2">
+            <p>
+              <i class="bi bi-whatsapp pe-1"></i>
+              (81) 98238-5634
+            </p>
+            <p>
+              <i class="bi bi-envelope pe-1"></i>
+              contato@flexpag.com
+            </p>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <span class="text-danger text-center" *ngIf="msgErro">{{ msgErro }}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <app-footer [model]="'desktopFooter'"></app-footer>
 </div>

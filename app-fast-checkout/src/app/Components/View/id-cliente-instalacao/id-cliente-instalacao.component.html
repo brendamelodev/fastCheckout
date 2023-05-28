@@ -1,4 +1,5 @@
-<div class="container-fluid vh-100">
+<!-- MOBILE -->
+<div class="container-fluid vh-100 d-sm-block d-md-none">
   <app-nav></app-nav>
   <app-paginator numeracao="1-3" txtPaginator="Identificação do Cliente" class="mx-5"></app-paginator>
 
@@ -18,7 +19,7 @@
   <div class="row">
     <div class="col pb-5" *ngIf="accountContract; else nenhumImovel">
       <div *ngFor="let data of invoices, let i = index">
-        <app-imovel (click)="setsInvoiceId(invoices[i].invoiceId)">
+        <app-imovel [bg]="'background'" (click)="setsInvoiceId(invoices[i].invoiceId)">
           <span accountContractId>{{ invoices[i].accountContractId }}</span>
           <span document>{{ accountContract[0].document | cpf }}</span>
           <span address>
@@ -34,4 +35,44 @@
   </div>
 
   <app-button btnBack="btnBack" dynamicRouteBack="/idClienteP1"></app-button>
+</div>
+
+<!-- DESKTOP -->
+<div class="container-fluid d-none d-md-block">
+  <app-nav [isDesktop]="true"></app-nav>
+
+  <div class="row">
+    <div class="col-4">
+      <app-step [step]="1"></app-step>
+    </div>
+
+    <div class="col-4 background d-flex rounded-3">
+      <div class="d-flex flex-column justify-content-evenly content gap-4">
+        <span class="txt-blue">Identificação do Cliente</span>
+
+        <p>Abaixo a lista de imóveis vinculados ao documento informado. Por gentileza,
+          selecione a instalação desejada para realizar o pagamento:</p>
+
+        <div *ngIf="accountContract; else nenhumImovel">
+          <div *ngFor="let data of invoices, let i = index">
+            <app-imovel [bg]="'background-light'" (click)="setsInvoiceId(invoices[i].invoiceId)">
+              <span accountContractId>{{ invoices[i].accountContractId }}</span>
+              <span document>{{ accountContract[0].document | cpf }}</span>
+              <span address>
+                {{ invoices[i].street | address }}, {{ invoices[i].district }}, {{ invoices[i].zipcode | cep }}
+              </span>
+            </app-imovel>
+          </div>
+        </div>
+
+        <ng-template #nenhumImovel>
+          <span class="span text-center pb-4">Ops! Ocorreu um erro...</span>
+        </ng-template>
+
+        <app-button btnBack="btnBack" dynamicRouteBack="/idClienteP1"></app-button>
+      </div>
+    </div>
+  </div>
+
+  <app-footer class="fixed-bottom" [model]="'desktopFooter'"></app-footer>
 </div>

@@ -25,6 +25,7 @@ import { CepPipe } from './Pipes/cep.pipe';
 import { NamePipe } from './Pipes/name.pipe';
 import { LoadingComponent } from './Components/loading/loading.component';
 import { LoadingInterceptor } from './Interceptors/loading.interceptor';
+import { StepComponent } from './Components/step/step.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LoadingInterceptor } from './Interceptors/loading.interceptor';
     AddressPipe,
     CepPipe,
     NamePipe,
-    LoadingComponent
+    LoadingComponent,
+    StepComponent
   ],
   imports: [
     BrowserModule,

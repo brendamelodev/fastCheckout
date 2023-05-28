@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class NavComponent {
   @Input() backgroundClass!: string;
+  @Input() isDesktop: boolean = false;
 }
