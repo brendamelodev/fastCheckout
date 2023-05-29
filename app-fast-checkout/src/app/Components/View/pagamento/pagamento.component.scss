@@ -3,7 +3,9 @@
 .row {
   padding: 1rem 0.5rem;
   margin-bottom: 0.5rem;
-  background-color: $cor-body;
+  .row-mobile {
+    background-color: $cor-body;
+  }
 }
 
 .vr {

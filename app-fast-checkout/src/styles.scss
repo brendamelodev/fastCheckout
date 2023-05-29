@@ -79,3 +79,46 @@ $cor-danger: #DC3545;
 .content {
   padding: 1rem 5rem;
 }
+
+.infosDesk {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: end;
+
+  .box {
+    margin: 0;
+    padding: 0;
+    background-color: $cor-body;
+    border-radius: 0.5rem;
+    width: 65%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1.5rem;
+
+    .campos {
+      background-color: $cor-light;
+      border-radius: 0.5rem;
+      margin: 0 2rem;
+      padding: 1rem;
+    }
+  }
+}
+
+.faturasContent {
+  background-color: $cor-body;
+  border-radius: 0.5rem;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home {
+  background-color: $cor-body;
+  border-radius: 0.5rem;
+  height: 80vh;
+  display: flex;
+}

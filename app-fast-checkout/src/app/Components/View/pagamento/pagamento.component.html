@@ -1,8 +1,9 @@
-<div class="container-fluid vh-100">
+<!-- MOBILE -->
+<div class="container-fluid vh-100 d-sm-block d-md-none">
   <app-nav></app-nav>
   <app-paginator numeracao="3-3" txtPaginator="Pagamento" class="mx-5"></app-paginator>
 
-  <div class="row d-flex align-items-center">
+  <div class="row row-mobile d-flex align-items-center">
     <div class="col-5">
       <p class="txt-small text-uppercase">cpf</p>
       <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
@@ -18,7 +19,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-mobile">
     <p class="txt-contrast pb-2">Forma de Pagamento</p>
     <div class="col-9">
       <app-type-pay [classIcon]="getClassIcon(selectedPaymentType)" [type]="selectedPaymentType"
@@ -50,7 +51,7 @@
 
   <!-- CARTÃO DE CRÉDITO -->
   <div *ngIf="selectedPaymentType === 'Cartão de Crédito'">
-    <div class="row">
+    <div class="row row-mobile">
       <p class="txt-contrast pb-2">Dados do cartão de crédito</p>
       <form [formGroup]="form">
         <input class="input" type="text" placeholder="número do cartão" formControlName="cartao" mask="000.000.000-00">
@@ -68,7 +69,7 @@
       </form>
     </div>
 
-    <div class="row mb-0 pb-0">
+    <div class="row row-mobile mb-0 pb-0">
       <div class="col-8">
         <p class="txt-small">Parcelas</p>
         <p id="parcelas">{{ selectedInstallment ? selectedInstallment.key + 'x de R$ ' + selectedInstallment.value :
@@ -86,7 +87,7 @@
     </div>
 
     <!-- Dropdown alterar parcelas -->
-    <div class="row" *ngIf="installments">
+    <div class="row row-mobile" *ngIf="installments">
       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <hr>
         <ul class="navbar-nav d-flex flex-column gap-2">
@@ -110,7 +111,7 @@
 
   <!-- BOLSA FAMÍLIA -->
   <div *ngIf="selectedPaymentType === 'Cartão de Débito Virtual Caixa'">
-    <div class="row">
+    <div class="row row-mobile">
       <p class="txt-contrast pb-2">Dados do cartão de dédito</p>
       <form>
         <app-input inputType="number" placeholderText="número do cartão"></app-input>
@@ -122,7 +123,7 @@
       </form>
     </div>
 
-    <div class="row mb-0 pb-0">
+    <div class="row row-mobile mb-0 pb-0">
       <div class="col-6 pb-4 d-flex flex-column gap-1">
         <p class="txt-small m-0">Valor total das faturas</p>
         <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
@@ -136,7 +137,7 @@
 
   <!-- PIX -->
   <div *ngIf="selectedPaymentType === 'Pagamento Instantâneo'">
-    <div class="row">
+    <div class="row row-mobile">
       <p class="txt-contrast pb-2">Código QR - PIX</p>
       <p class="txt-small">1. Clique no botão Gerar QR Code.</p>
       <p class="txt-small">2. Acesse seu Internet Banking ou app de pagamentos.</p>
@@ -145,7 +146,7 @@
       <p class="txt-small">5. Ao escanear o código, seu pagamento será creditado na hora.</p>
     </div>
 
-    <div class="row gap-2">
+    <div class="row row-mobile gap-2">
       <p class="txt-contrast">Dados de pagamento</p>
       <p class="txt-small">Ao pagar sua conta, essas informações aparecerão na fatura do seu banco:</p>
       <p class="txt-small fw-bold text-uppercase">Nome</p>
@@ -154,7 +155,7 @@
       <p id="parcelas" class="txt-small text-uppercase">BCO votorantim s.a.</p>
     </div>
 
-    <div class="row mb-0 pb-0">
+    <div class="row row-mobile mb-0 pb-0">
       <div class="col-6 pb-4 d-flex flex-column gap-1">
         <p class="txt-small m-0">Valor total das faturas</p>
         <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
@@ -166,7 +167,7 @@
     </div>
   </div>
 
-  <div class="row mt-2 py-4">
+  <div class="row row-mobile mt-2 py-4">
     <p class="txt-contrast pb-2">Informe os dados do comprovante</p>
     <form>
       <app-input inputType="text" placeholderText="nome completo"></app-input>
@@ -176,14 +177,300 @@
     <a class="text-decoration-none faq fw-bold text-center pt-2">Por que pedimos isso?</a>
   </div>
 
-  <div class="row background-light">
+  <div class="row row-mobile background-light">
     <app-button btnPay="btnPay" dynamicRoutePay="/"></app-button>
     <!-- <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button> -->
 
     <app-button btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
   </div>
 
-  <div class="row p-0">
+  <div class="row row-mobile p-0">
     <app-footer [model]="'mobileFooterFull'"></app-footer>
   </div>
+</div>
+
+<!-- DESKTOP -->
+<div class="container-fluid d-none d-md-block pe-0 me-0">
+  <app-nav [isDesktop]="true"></app-nav>
+
+  <div class="row pe-0 me-0">
+    <div class="col-4">
+      <app-step [step]="3"></app-step>
+    </div>
+
+    <div class="col-4">
+
+      <div class="d-flex flex-column justify-content-evenly content gap-4">
+        <div class="background rounded-3 p-3">
+          <p class="txt-contrast pb-2">Forma de Pagamento</p>
+          <div class="d-flex align-items-center justify-content-between">
+            <app-type-pay [classIcon]="getClassIcon(selectedPaymentType)" [type]="selectedPaymentType"
+              [description]="getDescription(selectedPaymentType)">
+            </app-type-pay>
+            <div class="d-flex align-items-end justify-content-end">
+              <span class="d-flex align-items-center gap-2" type="button" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                <p class="text-uppercase fs-alterar">alterar</p>
+                <i class="bi bi-chevron-down"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal alterar forma de pagamento -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="d-flex justify-content-between pb-2">
+                  <p class="modal-title txt-contrast" id="staticBackdropLabel">Forma de Pagamento</p>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <app-type-pay *ngFor="let paymentType of paymentTypes; let last = last"
+                  [classIcon]="paymentType.classIcon" [type]="paymentType.type" [description]="paymentType.description"
+                  (click)="selectPaymentType(paymentType.type)" data-bs-dismiss="modal">
+                  <div divisoria class="hr" *ngIf="!last">
+                    <hr class="px-2 mx-auto my-2">
+                  </div>
+                </app-type-pay>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARTÃO DE CRÉDITO -->
+        <div *ngIf="selectedPaymentType === 'Cartão de Crédito'">
+          <div class="background rounded-3 p-3">
+            <p class="txt-contrast pb-2">Dados do cartão de crédito</p>
+            <form [formGroup]="form">
+              <input class="input" type="text" placeholder="número do cartão" formControlName="cartao"
+                mask="000.000.000-00">
+              <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao"
+                mask="000000000">
+              <div class="d-flex gap-2">
+                <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade"
+                  mask="000000000">
+                <input class="input" type="text" placeholder="cvc" formControlName="cvc" mask="000000000">
+              </div>
+              <input class="input" type="text" placeholder="cep do endereço de cobrança" formControlName="cep"
+                mask="000000000">
+
+              <!-- <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
+                  obrigatório</span> -->
+            </form>
+          </div>
+
+          <div class="background rounded-3 p-3 mt-4">
+            <p class="fs-6 text-uppercase fw-bold">escolha em quantas vezes pagar</p>
+            <p class="txt-small fw-bold">Parcelas de apenas:</p>
+            <div class="d-flex align-items-center justify-content-between">
+              <p id="parcelas">{{ selectedInstallment ? selectedInstallment.key + 'x de R$ ' + selectedInstallment.value
+                : (installments | keyvalue)[0].key + 'x de R$ ' + (installments | keyvalue)[0].value }}</p>
+              <div class="d-flex align-items-end justify-content-end">
+                <span class="navbar p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+                  aria-controls="navbarNavDarkDropdown" aria-expanded="false">
+                  <span class="d-flex align-items-center gap-2">
+                    <p class="text-uppercase fs-alterar">alterar</p>
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Dropdown alterar parcelas -->
+            <div *ngIf="installments">
+              <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <hr>
+                <ul class="navbar-nav d-flex flex-column gap-2">
+                  <li class="nav-item dropdown d-flex flex-column align-items-center"
+                    *ngFor="let key of sortedKeys(installments)">
+                    <div class="parcelamento" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+                      aria-controls="navbarNavDarkDropdown" aria-expanded="false">
+                      <label [for]="'radioNoLabel' + key">
+                        <span class="numbParcela">{{ key }}x de</span>
+                        <span class="valorParcela">R$ {{installments[key]}}</span>
+                        <span class="txt-small">com taxas</span>
+                      </label>
+                      <input class="form-check-input" type="radio" [name]="'radioNoLabel'" [id]="'radioNoLabel' + key"
+                        [value]="installments[key]" (change)="updateSelectedInstallment(installments[key], key)">
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div divisoria class="hr">
+              <hr class="px-2 mx-auto my-2">
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <div class="pb-4 d-flex flex-column gap-1">
+                <p class="txt-small m-0">Valor total das faturas</p>
+                <p class="fw-bold m-0 fs-5">{{ selectedInstallment ? 'R$ ' + selectedInstallment.value : 'R$ ' +
+                  (installments | keyvalue)[0].value }}</p>
+              </div>
+              <div class="pb-4 d-flex flex-column gap-1">
+                <p class="txt-small m-0">Valor total do pagamento</p>
+                <p id="parcelas" class="fw-bold m-0 fs-5">{{ selectedInstallment ? 'R$ ' + selectedInstallment.value :
+                  'R$ ' + (installments | keyvalue)[0].value }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOLSA FAMÍLIA -->
+        <div *ngIf="selectedPaymentType === 'Cartão de Débito Virtual Caixa'">
+          <div class="background rounded-3 p-3">
+            <p class="txt-contrast pb-2">Dados do cartão de dédito</p>
+            <form>
+              <app-input inputType="number" placeholderText="número do cartão"></app-input>
+              <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input>
+              <div class="d-flex gap-2">
+                <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input>
+                <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input>
+              </div>
+            </form>
+          </div>
+
+          <div class="background rounded-3 p-3 mt-4 mb-0 pb-0">
+            <div class="d-flex">
+              <div class="col-6 pb-4 d-flex flex-column gap-1">
+                <p class="txt-small m-0">Valor total das faturas</p>
+                <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+              </div>
+              <div class="col-6 pb-4 d-flex flex-column gap-1">
+                <p class="txt-small m-0">Valor total do pagamento</p>
+                <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PIX -->
+        <div *ngIf="selectedPaymentType === 'Pagamento Instantâneo'">
+          <div class="background rounded-3 p-3">
+            <p class="txt-contrast pb-2">Código QR - PIX</p>
+            <p class="txt-small">1. Clique no botão Gerar QR Code.</p>
+            <p class="txt-small">2. Acesse seu Internet Banking ou app de pagamentos.</p>
+            <p class="txt-small">3. Escolha pagar via Pix.</p>
+            <p class="txt-small">4. Escaneie o código QR gerado (Ou copie o código de texto gerado)</p>
+            <p class="txt-small">5. Ao escanear o código, seu pagamento será creditado na hora.</p>
+          </div>
+
+          <div class="background rounded-3 p-3 mt-4 gap-2">
+            <p class="txt-contrast">Dados de pagamento</p>
+            <p class="txt-small">Ao pagar sua conta, essas informações aparecerão na fatura do seu banco:</p>
+            <p class="txt-small fw-bold text-uppercase">Nome</p>
+            <p id="parcelas" class="txt-small text-uppercase">FLEXPAG TECNOLOGIA E INSTITUICAO DE PAGAMENTO S. A</p>
+            <p class="txt-small fw-bold text-uppercase">Instituição</p>
+            <p id="parcelas" class="txt-small text-uppercase">BCO votorantim s.a.</p>
+          </div>
+
+          <div class="background rounded-3 p-3 mt-4 mb-0 pb-0">
+            <div class="d-flex">
+              <div class="col-6 pb-4 d-flex flex-column gap-1">
+                <p class="txt-small m-0">Valor total das faturas</p>
+                <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+              </div>
+              <div class="col-6 pb-4 d-flex flex-column gap-1">
+                <p class="txt-small m-0">Valor total do pagamento</p>
+                <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="background rounded-3 p-3 mt-2 py-4">
+          <p class="txt-contrast pb-2">Informe os dados do comprovante</p>
+          <form>
+            <app-input inputType="text" placeholderText="nome completo"></app-input>
+            <app-input inputType="email" placeholderText="e-mail"></app-input>
+            <app-input inputType="tel" placeholderText="telefone/celular"></app-input>
+          </form>
+          <a class="text-decoration-none faq fw-bold pt-2 d-flex justify-content-center">Por que pedimos isso?</a>
+        </div>
+
+        <div class="d-flex gap-3">
+          <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
+          <app-button class="flex-grow-1" btnPay="btnPay" dynamicRoutePay="/"></app-button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col infosDesk">
+      <div class="box">
+
+        <div class="campos mt-4">
+          <div class="d-flex flex-column gap-2">
+            <p class="txt-small text-uppercase">cpf</p>
+            <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
+            <p class="txt-small text-uppercase">código do cliente</p>
+            <p class="fs-6 txt-contrast" *ngIf="invoiceById">{{invoiceById[0].invoiceId}}</p>
+          </div>
+        </div>
+
+        <div class="campos" *ngIf="selectedPaymentType != 'Pagamento Instantâneo'">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pb-4 d-flex flex-column gap-1">
+              <p class="txt-small m-0">Valor total das faturas</p>
+              <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+            </div>
+            <div class="d-flex align-items-end justify-content-end">
+              <span class="navbar p-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDarkDropdownFaturas" aria-controls="navbarNavDarkDropdownFaturas"
+                aria-expanded="false">
+                <span class="d-flex align-items-center gap-2">
+                  <p class="text-uppercase fs-alterar">faturas</p>
+                  <i class="bi bi-chevron-down"></i>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Dropdown faturas -->
+          <div *ngIf="installments">
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdownFaturas">
+              <hr>
+              <div class="d-flex flex-column" *ngIf="invoiceById[0].selected">
+                <div class="d-flex justify-content-between">
+                  <p class="fw-bold m-0 fs-6">{{ invoiceById[0].invoiceId }}</p>
+                  <p class="fw-bold m-0 fs-6">R$ {{ invoiceById[0].amount.toFixed(2) }}</p>
+                </div>
+                <p class="txt-small m-0 text-uppercase opacity-50">vencimento {{invoiceById[0].dueDate | date:
+                  'dd/MM/yyyy'}}</p>
+              </div>
+            </div>
+            <div class="d-flex flex-column align-items-end justify-content-end gap-1 pt-3">
+              <p class="m-0">Valor total das faturas</p>
+              <p class="fw-bold m-0 fs-6">R$ {{ totalAmount.toFixed(2) }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="campos" *ngIf="selectedPaymentType != 'Pagamento Instantâneo'">
+          <div class="d-flex flex-column gap-2">
+            <p class="txt-contrast">Cartão Utilizado</p>
+            <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
+            <p class="fs-6">{{ accountContract[0].name }}</p>
+          </div>
+        </div>
+
+        <div class="campos">
+          <div class="d-flex flex-column gap-2">
+            <p class="txt-contrast pb-2">Taxa de Serviço</p>
+            <p class="txt-small">Débito Cartão Virtual Caixa (Auxílio Emergencial) <b>Sem juros</b></p>
+            <p class="txt-small">Cartão de Crédito (em 1x) <b>Sem juros</b></p>
+            <p class="txt-small">Cartão de Crédito (Parcelado de 2x a 21x)</p>
+            <p class="txt-small">Mastercard e Visa <b>2,05% por parcela</b></p>
+            <p class="txt-small">Hipercard, Elo e Amex <b>2,20% por parcela</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <app-footer [model]="'desktopFooter'"></app-footer>
 </div>
