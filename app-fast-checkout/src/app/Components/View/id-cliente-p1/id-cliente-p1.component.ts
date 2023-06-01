@@ -26,7 +26,7 @@ export class IdClienteP1Component {
     private router: Router,
     private dataService: DataService,
     private localStorageService: LocalStorageService
-    ) { }
+  ) { }
 
   form: FormGroup = this.fb.group({
     document: ['', [Validators.required, Validators.minLength(11)]],
@@ -40,11 +40,11 @@ export class IdClienteP1Component {
   getContractAccount() {
     if (this.form.valid) {
       this.subscription = this.apiService.getContractAccount(this.form.value['contract'], this.form.value['document'])
-      .pipe(
-        catchError(() => {
-          this.msgErro = 'Ops, ocorreu um erro.'
-          return EMPTY
-        })
+        .pipe(
+          catchError(() => {
+            this.msgErro = 'Ops, ocorreu um erro.'
+            return EMPTY
+          })
         )
         .subscribe(
           {
@@ -55,14 +55,9 @@ export class IdClienteP1Component {
                 this.contractAccount = data;
                 this.dataService.setDataAccountContract(data);
                 this.router.navigate(['idClienteInstalacao']);
-                if (this.localStorageService.getAll() >= 2) {
-                  this.localStorageService.clear();
-                  console.log('zerou');
-                } else {
-                  this.localStorageService.setItem('contractAccount', JSON.stringify(data));
-                  console.log(JSON.parse(this.localStorageService.getItem('contractAccount')));
 
-                }
+                this.localStorageService.clear();
+                this.localStorageService.setItem('contractAccount', JSON.stringify(data));
               }
             }
           }
