@@ -17,11 +17,11 @@
   </div>
 
   <div class="row">
-    <div class="col pb-5" *ngIf="accountContract; else nenhumImovel">
+    <div class="col pb-5" *ngIf="accountContractStorage; else nenhumImovel">
       <div *ngFor="let data of invoices, let i = index">
         <app-imovel [bg]="'background'" (click)="setsInvoiceId(invoices[i].invoiceId)">
           <span accountContractId>{{ invoices[i].accountContractId }}</span>
-          <span document>{{ accountContract[0].document | cpf }}</span>
+          <span document>{{ accountContractStorage[0].document | cpf }}</span>
           <span address>
             {{ invoices[i].street | address }}, {{ invoices[i].district }}, {{ invoices[i].zipcode | cep }}
           </span>
@@ -34,7 +34,7 @@
     </ng-template>
   </div>
 
-  <app-button btnBack="btnBack" dynamicRouteBack="/idClienteP1"></app-button>
+  <app-button btnBack="btnBack" dynamicRouteBack="/idClienteP1" (click)="clearStorage()"></app-button>
 </div>
 
 <!-- DESKTOP -->
@@ -53,11 +53,11 @@
         <p>Abaixo a lista de imóveis vinculados ao documento informado. Por gentileza,
           selecione a instalação desejada para realizar o pagamento:</p>
 
-        <div *ngIf="accountContract; else nenhumImovel">
+        <div *ngIf="accountContractStorage; else nenhumImovel">
           <div *ngFor="let data of invoices, let i = index">
             <app-imovel [bg]="'background-light'" (click)="setsInvoiceId(invoices[i].invoiceId)">
               <span accountContractId>{{ invoices[i].accountContractId }}</span>
-              <span document>{{ accountContract[0].document | cpf }}</span>
+              <span document>{{ accountContractStorage[0].document | cpf }}</span>
               <span address>
                 {{ invoices[i].street | address }}, {{ invoices[i].district }}, {{ invoices[i].zipcode | cep }}
               </span>
@@ -69,7 +69,7 @@
           <span class="span text-center pb-4">Ops! Ocorreu um erro...</span>
         </ng-template>
 
-        <app-button btnBack="btnBack" dynamicRouteBack="/idClienteP1"></app-button>
+        <app-button btnBack="btnBack" (click)="clearStorage()"></app-button>
       </div>
     </div>
   </div>

@@ -6,7 +6,7 @@
   <div class="row d-flex align-items-center background p-3">
     <div class="col-3">
       <p>CDC/Ligação</p>
-      <p class="fw-bold text-center" *ngIf="invoiceById">{{invoiceById[0].invoiceId}}</p>
+      <p class="fw-bold text-center" *ngIf="invoiceByIdStorage">{{invoiceByIdStorage[0].invoiceId}}</p>
     </div>
     <div class="col-1">
       <div class="d-flex">
@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="col-8">
-      <p *ngIf="accountContract">Nome</p>
-      <p class="fw-bold" *ngIf="accountContract">{{ accountContract[0].name | name }}</p>
-      <p *ngIf="invoiceById">Endereço</p>
-      <p class="fw-bold" *ngIf="invoiceById">
-        {{ invoiceById[0].street | address }}, {{ invoiceById[0].district }}, {{ invoiceById[0].zipcode | cep }}
+      <p *ngIf="accountContractStorage">Nome</p>
+      <p class="fw-bold" *ngIf="accountContractStorage">{{ accountContractStorage[0].name | name }}</p>
+      <p *ngIf="invoiceByIdStorage">Endereço</p>
+      <p class="fw-bold" *ngIf="invoiceByIdStorage">
+        {{ invoiceByIdStorage[0].street | address }}, {{ invoiceByIdStorage[0].district }}, {{ invoiceByIdStorage[0].zipcode | cep }}
       </p>
     </div>
   </div>
@@ -30,11 +30,11 @@
   </div>
 
   <div class="row background pb-3">
-    <div class="col pb-2 overflow-auto" *ngIf="invoiceById">
-      <app-valor-fatura (click)="toggleInvoiceSelection(invoiceById[0])">
-        <i icon class="bi" [ngClass]="invoiceById[0].selected ? 'bi-check-circle' : 'bi-circle'"></i>
-        <span amount>{{invoiceById[0].amount}}</span>
-        <span dueDate>{{invoiceById[0].dueDate | date: 'dd/MM/yyyy'}}</span>
+    <div class="col pb-2 overflow-auto" *ngIf="invoiceByIdStorage">
+      <app-valor-fatura (click)="toggleInvoiceSelection(invoiceByIdStorage[0])">
+        <i icon class="bi" [ngClass]="invoiceByIdStorage[0].selected ? 'bi-check-circle' : 'bi-circle'"></i>
+        <span amount>{{invoiceByIdStorage[0].amount}}</span>
+        <span dueDate>{{invoiceByIdStorage[0].dueDate | date: 'dd/MM/yyyy'}}</span>
       </app-valor-fatura>
     </div>
   </div>
@@ -69,18 +69,18 @@
           <span class="btnSelect" (click)="toggleAllInvoiceSelection()">{{ btnSelectText }}</span>
         </div>
 
-        <div *ngIf="invoiceById">
-          <app-valor-fatura (click)="toggleInvoiceSelection(invoiceById[0])">
-            <i icon class="bi" [ngClass]="invoiceById[0].selected ? 'bi-check-circle' : 'bi-circle'"></i>
-            <span amount>{{invoiceById[0].amount}}</span>
-            <span dueDate>{{invoiceById[0].dueDate | date: 'dd/MM/yyyy'}}</span>
+        <div *ngIf="invoiceByIdStorage">
+          <app-valor-fatura (click)="toggleInvoiceSelection(invoiceByIdStorage[0])">
+            <i icon class="bi" [ngClass]="invoiceByIdStorage[0].selected ? 'bi-check-circle' : 'bi-circle'"></i>
+            <span amount>{{invoiceByIdStorage[0].amount}}</span>
+            <span dueDate>{{invoiceByIdStorage[0].dueDate | date: 'dd/MM/yyyy'}}</span>
           </app-valor-fatura>
         </div>
       </div>
 
       <div class="d-flex gap-3 px-2">
         <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/idClienteInstalacao"></app-button>
-        <app-button class="flex-grow-1" btnNext="btnNext" dynamicRouteNext="/pagamento"></app-button>
+        <app-button class="flex-grow-1" btnNext="btnNext" dynamicRouteNext="/pagamento" [disabled]="amount == 0"></app-button>
       </div>
     </div>
 
@@ -89,21 +89,21 @@
       <div class="campos mt-4">
         <div class="d-flex flex-column gap-2">
           <p class="txt-small text-uppercase">cpf</p>
-          <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
+          <p class="fs-6 txt-contrast">{{ accountContractStorage[0].document | cpf }}</p>
           <p class="txt-small text-uppercase">código do cliente</p>
-          <p class="fs-6 txt-contrast" *ngIf="invoiceById">{{invoiceById[0].invoiceId}}</p>
+          <p class="fs-6 txt-contrast" *ngIf="invoiceByIdStorage">{{invoiceByIdStorage[0].invoiceId}}</p>
         </div>
       </div>
 
       <div class="campos">
         <p class="txt-small text-uppercase pb-3">Faturas selecionadas</p>
 
-        <div class="d-flex flex-column" *ngIf="invoiceById[0].selected">
+        <div class="d-flex flex-column" *ngIf="invoiceByIdStorage[0].selected">
           <div class="d-flex justify-content-between">
-            <p class="fw-bold m-0 fs-6">{{ invoiceById[0].invoiceId }}</p>
-            <p class="fw-bold m-0 fs-6">R$ {{ invoiceById[0].amount.toFixed(2) }}</p>
+            <p class="fw-bold m-0 fs-6">{{ invoiceByIdStorage[0].invoiceId }}</p>
+            <p class="fw-bold m-0 fs-6">R$ {{ invoiceByIdStorage[0].amount.toFixed(2) }}</p>
           </div>
-          <p class="txt-small m-0 text-uppercase opacity-50">vencimento {{invoiceById[0].dueDate | date:
+          <p class="txt-small m-0 text-uppercase opacity-50">vencimento {{invoiceByIdStorage[0].dueDate | date:
             'dd/MM/yyyy'}}</p>
         </div>
 

@@ -6,6 +6,7 @@ import { EMPTY, Subscription, catchError } from 'rxjs';
 import { ContractAccount } from 'src/app/Models/interfaces';
 import { ApiService } from 'src/app/Service/api.service';
 import { DataService } from 'src/app/Service/data.service';
+import { LocalStorageService } from 'src/app/Service/local-storage.service';
 
 @Component({
   selector: 'app-id-cliente-p1',
@@ -15,9 +16,17 @@ import { DataService } from 'src/app/Service/data.service';
 export class IdClienteP1Component {
   contractAccount!: ContractAccount;
   subscription?: Subscription;
+  cpf: string = '';
   msgErro = '';
 
-  constructor(private viewportScroller: ViewportScroller, private apiService: ApiService, private fb: FormBuilder, private router: Router, private dataService: DataService) { }
+  constructor(
+    private viewportScroller: ViewportScroller,
+    private apiService: ApiService,
+    private fb: FormBuilder,
+    private router: Router,
+    private dataService: DataService,
+    private localStorageService: LocalStorageService
+    ) { }
 
   form: FormGroup = this.fb.group({
     document: ['', [Validators.required, Validators.minLength(11)]],
@@ -46,6 +55,14 @@ export class IdClienteP1Component {
                 this.contractAccount = data;
                 this.dataService.setDataAccountContract(data);
                 this.router.navigate(['idClienteInstalacao']);
+                if (this.localStorageService.getAll() >= 2) {
+                  this.localStorageService.clear();
+                  console.log('zerou');
+                } else {
+                  this.localStorageService.setItem('contractAccount', JSON.stringify(data));
+                  console.log(JSON.parse(this.localStorageService.getItem('contractAccount')));
+
+                }
               }
             }
           }
@@ -63,5 +80,4 @@ export class IdClienteP1Component {
   clearMsgErro() {
     this.msgErro = '';
   }
-
 }
