@@ -54,18 +54,66 @@
     <div class="row row-mobile">
       <p class="txt-contrast pb-2">Dados do cartão de crédito</p>
       <form [formGroup]="form">
-        <input class="input" type="text" placeholder="número do cartão" formControlName="cartao" mask="000.000.000-00">
-        <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao"
-          mask="000000000">
-        <div class="d-flex gap-2">
-          <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="000000000">
-          <input class="input" type="text" placeholder="cvc" formControlName="cvc" mask="000000000">
-        </div>
-        <input class="input" type="text" placeholder="cep do endereço de cobrança" formControlName="cep"
-          mask="000000000">
 
-        <!-- <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
-            obrigatório</span> -->
+        <div class="input-group">
+          <input class="input-icon" type="text" placeholder="número do cartão" formControlName="cartao"
+            mask="0000 0000 0000 0000||0000 000000 00000||0000 000000 0000||0000 0000000 0000||00000 0000 00000 0"
+            (input)="validateCardNumber(form.controls['cartao'].value)">
+          <span class="icon-input">
+            <img [src]="cardIcon" [alt]="textCard">
+          </span>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="span" *ngIf="textCard == 'Cartão Inválido'">*{{ textCard }}</span>
+          <div *ngIf="form.controls['cartao'].invalid && form.controls['cartao'].touched">
+            <span class="span" *ngIf="form.controls['cartao'].errors?.['required']">*Número do Cartão
+              Obrigratório</span>
+            <span class="span" *ngIf="form.controls['cartao'].errors?.['minLength']">*O cartão deve conter no
+              mínimo 14 dígitos</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao">
+        </div>
+        <span class="span" *ngIf="form.controls['nameCartao'].invalid && form.controls['nameCartao'].touched">*Nome
+          impresso
+          Obrigratório</span>
+
+        <div class="d-flex gap-2">
+          <div class="input-group">
+            <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="00/00"
+              (input)="validateCardValidade(form.controls['validade'].value)">
+          </div>
+
+          <div class="input-group">
+            <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="0000||000">
+            <span class="icon-input">
+              <i class="bi bi-info-circle-fill"></i>
+            </span>
+          </div>
+        </div>
+        <div class="d-flex gap-2">
+          <span class="span" *ngIf="validade == true">*Data inválida</span>
+
+          <div *ngIf="form.controls['validade'].invalid && form.controls['validade'].touched">
+            <span class="span" *ngIf="form.controls['validade'].errors?.['required']">*Validade do Cartão
+              Obrigratório</span>
+          </div>
+
+          <div *ngIf="form.controls['cvc'].invalid && form.controls['cvc'].touched">
+            <span class="span" *ngIf="form.controls['cvc'].errors?.['required']">*CVC Obrigratório</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input class="input" type="text" placeholder="cep do endereço de cobrança" formControlName="cep"
+            mask="00000-000">
+        </div>
+        <div *ngIf="form.controls['cep'].invalid && form.controls['cep'].touched">
+          <span class="span" *ngIf="form.controls['cep'].errors?.['required']">*Cep Obrigratório</span>
+        </div>
+
       </form>
     </div>
 
@@ -114,11 +162,11 @@
     <div class="row row-mobile">
       <p class="txt-contrast pb-2">Dados do cartão de dédito</p>
       <form>
-        <app-input inputType="number" placeholderText="número do cartão"></app-input>
-        <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input>
+        <!-- <app-input inputType="number" placeholderText="número do cartão"></app-input> -->
+        <!-- <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input> -->
         <div class="d-flex gap-2">
-          <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input>
-          <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input>
+          <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input> -->
+          <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input> -->
         </div>
       </form>
     </div>
@@ -169,18 +217,34 @@
 
   <div class="row row-mobile mt-2 py-4">
     <p class="txt-contrast pb-2">Informe os dados do comprovante</p>
-    <form>
-      <app-input inputType="text" placeholderText="nome completo"></app-input>
-      <app-input inputType="email" placeholderText="e-mail"></app-input>
-      <app-input inputType="tel" placeholderText="telefone/celular"></app-input>
+    <form [formGroup]="form">
+      <div class="input-group">
+        <input class="input" type="text" placeholder="nome completo" formControlName="name">
+      </div>
+      <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+        <span class="span" *ngIf="form.controls['name'].errors?.['required']">*Nome Obrigratório</span>
+      </div>
+
+      <div class="input-group">
+        <input class="input" type="text" placeholder="e-mail" formControlName="email">
+      </div>
+      <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+        <span class="span" *ngIf="form.controls['email'].errors?.['required']">*E-mail Obrigratório</span>
+      </div>
+
+      <div class="input-group">
+        <input class="input" type="text" placeholder="telefone/celular" formControlName="telefone"
+          mask="(00) 0.0000-0000">
+      </div>
+      <div *ngIf="form.controls['telefone'].invalid && form.controls['telefone'].touched">
+        <span class="span" *ngIf="form.controls['telefone'].errors?.['required']">*Telefone Obrigratório</span>
+      </div>
     </form>
     <a class="text-decoration-none faq fw-bold text-center pt-2">Por que pedimos isso?</a>
   </div>
 
   <div class="row row-mobile background-light">
-    <app-button btnPay="btnPay" dynamicRoutePay="/"></app-button>
-    <!-- <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button> -->
-
+    <app-button btnPay="btnPay" dynamicRoutePay="/" [disabled]="form.invalid"></app-button>
     <app-button btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
   </div>
 
@@ -244,20 +308,67 @@
           <div class="background rounded-3 p-3">
             <p class="txt-contrast pb-2">Dados do cartão de crédito</p>
             <form [formGroup]="form">
-              <input class="input" type="text" placeholder="número do cartão" formControlName="cartao"
-                mask="000.000.000-00">
-              <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao"
-                mask="000000000">
-              <div class="d-flex gap-2">
-                <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade"
-                  mask="000000000">
-                <input class="input" type="text" placeholder="cvc" formControlName="cvc" mask="000000000">
-              </div>
-              <input class="input" type="text" placeholder="cep do endereço de cobrança" formControlName="cep"
-                mask="000000000">
 
-              <!-- <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
-                  obrigatório</span> -->
+              <div class="input-group">
+                <input class="input-icon" type="text" placeholder="número do cartão" formControlName="cartao"
+                  mask="0000 0000 0000 0000||0000 000000 00000||0000 000000 0000||0000 0000000 0000||00000 0000 00000 0"
+                  (input)="validateCardNumber(form.controls['cartao'].value)">
+                <span class="icon-input">
+                  <img [src]="cardIcon" [alt]="textCard">
+                </span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="span" *ngIf="textCard == 'Cartão Inválido'">*{{ textCard }}</span>
+                <div *ngIf="form.controls['cartao'].invalid && form.controls['cartao'].touched">
+                  <span class="span" *ngIf="form.controls['cartao'].errors?.['required']">*Número do Cartão
+                    Obrigratório</span>
+                  <span class="span" *ngIf="form.controls['cartao'].errors?.['minLength']">*O cartão deve conter no
+                    mínimo 14 dígitos</span>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao">
+              </div>
+              <span class="span"
+                *ngIf="form.controls['nameCartao'].invalid && form.controls['nameCartao'].touched">*Nome impresso
+                Obrigratório</span>
+
+              <div class="d-flex gap-2">
+                <div class="input-group">
+                  <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="M0/00"
+                    (input)="validateCardValidade(form.controls['validade'].value)">
+                </div>
+
+                <div class="input-group">
+                  <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="0000||000">
+                  <span class="icon-input">
+                    <i class="bi bi-info-circle-fill"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <span class="span" *ngIf="validade == true">*Data inválida</span>
+
+                <div *ngIf="form.controls['validade'].invalid && form.controls['validade'].touched">
+                  <span class="span" *ngIf="form.controls['validade'].errors?.['required']">*Validade do Cartão
+                    Obrigratório</span>
+                </div>
+
+                <div *ngIf="form.controls['cvc'].invalid && form.controls['cvc'].touched">
+                  <span class="span" *ngIf="form.controls['cvc'].errors?.['required']">*CVC Obrigratório</span>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <input class="input" type="text" placeholder="cep do endereço de cobrança" formControlName="cep"
+                  mask="00000-000">
+              </div>
+              <div *ngIf="form.controls['cep'].invalid && form.controls['cep'].touched">
+                <span class="span" *ngIf="form.controls['cep'].errors?.['required']">*Cep Obrigratório</span>
+              </div>
+
             </form>
           </div>
 
@@ -324,11 +435,11 @@
           <div class="background rounded-3 p-3">
             <p class="txt-contrast pb-2">Dados do cartão de dédito</p>
             <form>
-              <app-input inputType="number" placeholderText="número do cartão"></app-input>
-              <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input>
+              <!-- <app-input inputType="number" placeholderText="número do cartão"></app-input> -->
+              <!-- <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input> -->
               <div class="d-flex gap-2">
-                <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input>
-                <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input>
+                <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input> -->
+                <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input> -->
               </div>
             </form>
           </div>
@@ -383,17 +494,35 @@
 
         <div class="background rounded-3 p-3 mt-2 py-4">
           <p class="txt-contrast pb-2">Informe os dados do comprovante</p>
-          <form>
-            <app-input inputType="text" placeholderText="nome completo"></app-input>
-            <app-input inputType="email" placeholderText="e-mail"></app-input>
-            <app-input inputType="tel" placeholderText="telefone/celular"></app-input>
+          <form [formGroup]="form">
+            <div class="input-group">
+              <input class="input" type="text" placeholder="nome completo" formControlName="name">
+            </div>
+            <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+              <span class="span" *ngIf="form.controls['name'].errors?.['required']">*Nome Obrigratório</span>
+            </div>
+
+            <div class="input-group">
+              <input class="input" type="text" placeholder="e-mail" formControlName="email">
+            </div>
+            <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+              <span class="span" *ngIf="form.controls['email'].errors?.['required']">*E-mail Obrigratório</span>
+            </div>
+
+            <div class="input-group">
+              <input class="input" type="text" placeholder="telefone/celular" formControlName="telefone"
+                mask="(00) 0.0000-0000">
+            </div>
+            <div *ngIf="form.controls['telefone'].invalid && form.controls['telefone'].touched">
+              <span class="span" *ngIf="form.controls['telefone'].errors?.['required']">*Telefone Obrigratório</span>
+            </div>
           </form>
           <a class="text-decoration-none faq fw-bold pt-2 d-flex justify-content-center">Por que pedimos isso?</a>
         </div>
 
         <div class="d-flex gap-3">
           <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
-          <app-button class="flex-grow-1" btnPay="btnPay" dynamicRoutePay="/"></app-button>
+          <app-button class="flex-grow-1" btnPay="btnPay" dynamicRoutePay="/" [disabled]="form.invalid"></app-button>
         </div>
 
       </div>
@@ -450,10 +579,16 @@
         </div>
 
         <div class="campos" *ngIf="selectedPaymentType != 'Pagamento Instantâneo'">
-          <div class="d-flex flex-column gap-2">
+          <div class="d-flex flex-column gap-3">
             <p class="txt-contrast">Cartão Utilizado</p>
-            <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
-            <p class="fs-6">{{ accountContract[0].name }}</p>
+            <div class="d-flex gap-3">
+              <span>
+                <img [src]="cardIcon" [alt]="textCard">
+              </span>
+              <p class="fs-6 txt-contrast" *ngIf="form.controls['cartao'].value">{{ form.controls['cartao'].value |
+                cartao}}</p>
+            </div>
+            <p class="fs-6">{{ form.controls['nameCartao'].value | titlecase }}</p>
           </div>
         </div>
 

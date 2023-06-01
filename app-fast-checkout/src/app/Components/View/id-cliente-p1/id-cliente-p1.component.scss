@@ -25,3 +25,8 @@
 .suporte {
   font-size: 0.85rem;
 }
+
+.bi-search , .bi::before{
+  color: $cor-primary;
+  font-weight: bold !important;
+}

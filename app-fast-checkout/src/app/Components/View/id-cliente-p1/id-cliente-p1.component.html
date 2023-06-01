@@ -25,13 +25,20 @@
         <span class="btn-info">CPF/CNPJ</span>
       </div>
       <form [formGroup]="form">
-        <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00"
-          (input)="clearMsgErro()">
+        <div class="input-group">
+          <input class="input-icon" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00"
+            (input)="clearMsgErro()">
+          <span class="icon-input">
+            <i class="bi bi-search"></i>
+          </span>
+        </div>
         <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
           obrigatório</span>
 
-        <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract"
-          mask="000000000" (input)="clearMsgErro()">
+        <div class="input-group">
+          <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract"
+            mask="000000000" (input)="clearMsgErro()">
+        </div>
         <span class="span" *ngIf="form.controls['contract'].invalid && form.controls['contract'].touched">*contrato
           obrigatório</span>
 
@@ -71,12 +78,19 @@
 
         <form [formGroup]="form" class="d-flex flex-column gap-2">
           <span class="btn-info my-0">CPF/CNPJ</span>
-          <input class="input" type="text" placeholder="digite seu cpf" formControlName="document" mask="000.000.000-00"
-            (input)="clearMsgErro()">
+          <div class="input-group">
+            <input class="input-icon" type="text" placeholder="digite seu cpf" formControlName="document"
+              mask="000.000.000-00" (input)="clearMsgErro()">
+            <span class="icon-input">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
           <span class="span" *ngIf="form.controls['document'].invalid && form.controls['document'].touched">*cpf
             obrigatório</span>
-          <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract"
-            mask="000000000" (input)="clearMsgErro()">
+          <div class="input-group">
+            <input class="input" type="text" placeholder="digite o número do contrato" formControlName="contract"
+              mask="000000000" (input)="clearMsgErro()">
+          </div>
           <span class="span" *ngIf="form.controls['contract'].invalid && form.controls['contract'].touched">*contrato
             obrigatório</span>
           <app-button btnNext="btnNext" (click)="getContractAccount()" [disabled]="form.invalid"></app-button>
