@@ -8,24 +8,24 @@ export class LocalStorageService {
   constructor() { }
 
   setItem(key: string, value: any): void {
-    localStorage.setItem(key, JSON.stringify(value));
+    sessionStorage.setItem(key, JSON.stringify(value));
   }
 
   getItem(key: string): any {
-    const item = localStorage.getItem(key);
+    const item = sessionStorage.getItem(key);
     return item ? JSON.parse(item) : null;
   }
 
   getAll(): number {
-    return localStorage.length;
+    return sessionStorage.length;
   }
 
   removeItem(key: string): void {
-    localStorage.removeItem(key);
+    sessionStorage.removeItem(key);
   }
 
   clear(): void {
-    localStorage.clear();
+    sessionStorage.clear();
   }
 
 }
