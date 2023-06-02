@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/Service/api.service';
 import { DataService } from 'src/app/Service/data.service';
+import { LoadingService } from 'src/app/Service/loading.service';
 import { LocalStorageService } from 'src/app/Service/local-storage.service';
 
 @Component({
@@ -11,33 +12,24 @@ import { LocalStorageService } from 'src/app/Service/local-storage.service';
   styleUrls: ['./id-cliente-instalacao.component.scss']
 })
 export class IdClienteInstalacaoComponent implements OnInit {
-  accountContract!: any;
-  invoices!: any;
   subscription?: Subscription;
-  msgErro = '';
-  invoiceId?: string;
   accountContractStorage: any;
   invoicesStorage: any;
   invoiceIdStorage: any;
+  msgErro = '';
 
-  constructor(private dataService: DataService, private apiService: ApiService, private router: Router, private localStorageService: LocalStorageService) { }
+  constructor(private apiService: ApiService, private router: Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
-    this.dataService.dataAccountContract$.subscribe(data => {
-      this.accountContract = data;
-    });
-
     this.getInvoices();
-
     this.accountContractStorage = JSON.parse(this.localStorageService.getItem('contractAccount'));
-    // console.log(this.accountContractStorage[0]?.document);
+    this.invoicesStorage = JSON.parse(this.localStorageService.getItem('invoices'));
   }
 
   getInvoices() {
-    this.subscription = this.apiService.getInvoices(this.accountContract).subscribe(
+    this.subscription = this.apiService.getInvoices(this.accountContractStorage).subscribe(
       {
         next: data => {
-          this.invoices = data;
           this.localStorageService.setItem('invoices', JSON.stringify(data));
           this.invoicesStorage = JSON.parse(this.localStorageService.getItem('invoices'));
         }
@@ -52,15 +44,26 @@ export class IdClienteInstalacaoComponent implements OnInit {
   }
 
   setsInvoiceId(data: any) {
-    this.invoiceId = data;
-    this.dataService.setInvoiceId(data);
     this.localStorageService.setItem('invoiceId', JSON.stringify(data));
     this.invoiceIdStorage = JSON.parse(this.localStorageService.getItem('invoiceId'));
-    this.router.navigateByUrl('/faturas');
+    this.getInvoiceById();
+    setTimeout(() => {
+      this.router.navigateByUrl('/faturas');
+    }, 50);
   }
 
-  clearStorage() {
-    this.localStorageService.clear();
-    this.router.navigate(['idClienteP1']);
+  getInvoiceById() {
+    if (this.invoiceIdStorage) {
+      this.subscription = this.apiService.getInvoiceById(this.invoiceIdStorage).subscribe(
+        {
+          next: data => {
+            this.localStorageService.setItem('invoiceById', JSON.stringify(data));
+            console.log('pegou');
+          }
+        });
+    }
+    else {
+      console.log("Ops! Ocorreu um erro.");
+    }
   }
 }
