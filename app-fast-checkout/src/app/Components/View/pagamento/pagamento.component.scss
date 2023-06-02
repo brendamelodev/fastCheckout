@@ -76,3 +76,10 @@ img{
   width: 2rem;
   height: auto;
 }
+
+
+.scrollable {
+  padding: 0 0.5rem;
+  max-height: 350px;
+  overflow-y: auto;
+}

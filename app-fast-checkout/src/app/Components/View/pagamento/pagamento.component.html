@@ -141,7 +141,7 @@
 
     <!-- Dropdown alterar parcelas -->
     <div class="row row-mobile" *ngIf="installmentsStorage">
-      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <div class="collapse navbar-collapse scrollable" id="navbarNavDarkDropdown">
         <hr>
         <ul class="navbar-nav d-flex flex-column gap-2">
           <li class="nav-item dropdown d-flex flex-column align-items-center"
@@ -443,7 +443,7 @@
             </div>
 
             <!-- Dropdown alterar parcelas -->
-            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" *ngIf="installmentsStorage">
+            <div class="collapse navbar-collapse scrollable" id="navbarNavDarkDropdown" *ngIf="installmentsStorage">
               <hr>
               <ul class="navbar-nav d-flex flex-column gap-2">
                 <li class="nav-item dropdown d-flex flex-column align-items-center"
@@ -621,7 +621,8 @@
 
         <div class="d-flex gap-3">
           <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
-          <app-button class="flex-grow-1" btnPay="btnPay" (click)="onFormSubmit()" [disabled]="form.invalid"></app-button>
+          <app-button class="flex-grow-1" btnPay="btnPay" (click)="onFormSubmit()"
+            [disabled]="form.invalid"></app-button>
         </div>
 
       </div>
