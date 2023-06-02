@@ -1,60 +1,63 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ContractAccount } from '../Models/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private accountContract?: any;
-  private invoices?: any;
-  private invoiceId?: string;
-  private invoiceById?: any;
-  private totalAmount: number = 0;
-  // Cria um objeto observável que compartilha os dados entre os componentes
-  private dataAccountContractSubject = new BehaviorSubject<any>(null);
-  // Cria um Observable somente leitura para os componentes se inscreverem
-  public dataAccountContract$ = this.dataAccountContractSubject.asObservable();
+  // contractAccount$: ContractAccount[] = [];
 
-  constructor() { }
+  // private accountContract?: any;
+  // private invoices?: any;
+  // private invoiceId?: string;
+  // private invoiceById?: any;
+  // private totalAmount: number = 0;
+  // // Cria um objeto observável que compartilha os dados entre os componentes
+  // private dataAccountContractSubject = new BehaviorSubject<any>(null);
+  // // Cria um Observable somente leitura para os componentes se inscreverem
+  // public dataAccountContract$ = this.dataAccountContractSubject.asObservable();
 
-  setAccountContract(data: any) {
-    return this.accountContract = data;
-  }
-  getAccountContract() {
-    return this.accountContract;
-  }
+  // constructor() { }
 
-  setInvoices(data: any) {
-    return this.invoices = data;
-  }
-  getInvoices() {
-    return this.invoices;
-  }
+  // setAccountContract(data: any) {
+  //   return this.accountContract = data;
+  // }
+  // getAccountContract() {
+  //   return this.accountContract;
+  // }
 
-  setInvoiceId(data: any) {
-    return this.invoiceId = data;
-  }
-  getInvoiceId() {
-    return this.invoiceId;
-  }
+  // setInvoices(data: any) {
+  //   return this.invoices = data;
+  // }
+  // getInvoices() {
+  //   return this.invoices;
+  // }
 
-  setInvoiceById(data: any) {
-    return this.invoiceById = data;
-  }
-  getInvoiceById() {
-    return this.invoiceById;
-  }
+  // setInvoiceId(data: any) {
+  //   return this.invoiceId = data;
+  // }
+  // getInvoiceId() {
+  //   return this.invoiceId;
+  // }
 
-  setTotalAmount(value: number) {
-    this.totalAmount = value;
-  }
-  getTotalAmount(): number {
-    return this.totalAmount;
-  }
+  // setInvoiceById(data: any) {
+  //   return this.invoiceById = data;
+  // }
+  // getInvoiceById() {
+  //   return this.invoiceById;
+  // }
 
-  // Define um método para atualizar os dados do objeto observável
-  setDataAccountContract(data: any) {
-    this.dataAccountContractSubject.next(data);
-    this.setAccountContract(data);
-  }
+  // setTotalAmount(value: number) {
+  //   this.totalAmount = value;
+  // }
+  // getTotalAmount(): number {
+  //   return this.totalAmount;
+  // }
+
+  // // Define um método para atualizar os dados do objeto observável
+  // setDataAccountContract(data: any) {
+  //   this.dataAccountContractSubject.next(data);
+  //   this.setAccountContract(data);
+  // }
 }
