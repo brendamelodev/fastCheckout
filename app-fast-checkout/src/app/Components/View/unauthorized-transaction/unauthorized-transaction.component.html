@@ -1,1 +1,65 @@
-<p>unauthorized-transaction works!</p>
+<!-- MOBILE -->
+<div class="container-fluid vh-100 d-sm-block d-md-none">
+  <div class="comprovante-mobile">
+    <div class="transaction">
+      <span class="icon-emoji">
+        <i class="bi bi-emoji-laughing"></i>
+      </span>
+      <span>Transação não Aprovada!</span>
+    </div>
+
+    <hr class="hr">
+  </div>
+
+  <div class="comprovante-pagamento">
+    <p>Por gentileza entrar em contato com o banco emissor de seu cartão através do número localizado no verso para
+      liberação do pagamento.</p>
+
+    <div class="dados">
+      <span class="destaque">Atendimento</span>
+      <span>XXXX-XXXX (Capitais e regiões metropolitanas)</span>
+      <span>0800 XXX XXXX (Demais regiões)</span>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <app-button btnNext="btnNext" textNext="Tentar novamente"></app-button>
+  </div>
+
+  <app-footer [model]="'mobileFooter'"></app-footer>
+</div>
+
+<!-- DESKTOP -->
+<div class="container-fluid d-none d-md-block">
+  <app-nav [isDesktop]="true"></app-nav>
+
+  <div class="row">
+    <div class="comprovante">
+      <div class="transaction">
+        <span class="icon-emoji">
+          <i class="bi bi-emoji-laughing"></i>
+        </span>
+        <span class="pb-3">Transação não Aprovada!</span>
+
+        <hr class="hr">
+      </div>
+
+      <div class="comprovante-pagamento">
+        <p>Por gentileza entrar em contato com o banco emissor de seu cartão através do número localizado no verso para
+          liberação do pagamento.</p>
+
+        <div class="dados">
+          <span class="destaque">Atendimento</span>
+          <span>XXXX-XXXX (Capitais e regiões metropolitanas)</span>
+          <span>0800 XXX XXXX (Demais regiões)</span>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <app-button btnNext="btnNext" textNext="Tentar novamente"></app-button>
+      </div>
+    </div>
+  </div>
+
+  <app-footer [model]="'desktopFooter'"></app-footer>
+</div>
