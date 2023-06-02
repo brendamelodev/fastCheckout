@@ -86,12 +86,12 @@
 
         <div class="d-flex gap-2">
           <div class="input-group">
-            <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="00/00"
+            <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="M0/00"
               (input)="validateCardValidade(form.controls['validade'].value)">
           </div>
 
           <div class="input-group">
-            <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="0000||000">
+            <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="000||0000">
             <span class="icon-input">
               <i class="bi bi-info-circle-fill"></i>
             </span>
@@ -391,7 +391,7 @@
                 </div>
 
                 <div class="input-group">
-                  <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="0000||000">
+                  <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="000||0000">
                   <span class="icon-input">
                     <i class="bi bi-info-circle-fill"></i>
                   </span>

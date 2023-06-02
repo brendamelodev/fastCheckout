@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/Service/api.service';
 import { LocalStorageService } from 'src/app/Service/local-storage.service';
@@ -36,7 +37,7 @@ export class PagamentoComponent implements OnInit {
     cartao: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(17)]],
     nameCartao: ['', [Validators.required, Validators.minLength(3)]],
     validade: ['', [Validators.required]],
-    cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(4)]],
+    cvc: ['', [Validators.required]],
     cep: ['', [Validators.required, Validators.minLength(8)]],
     name: ['', [Validators.required]],
     email: ['', Validators.required],
@@ -164,27 +165,38 @@ export class PagamentoComponent implements OnInit {
     //   expiration_date: '10/2029',
     //   security_code: '123'
     // };
+    const date = new Date(Date.now());
+    const formatDate = moment(date).format('L')
+    const parts = formatDate.split("/");
+    const twoFirstYear = parts[2].slice(0, 2);
+
+    const control = this.form.controls['validade'].value
+    const validade = (control.slice(0, 2) + "/" + twoFirstYear + control.slice(-2)).toString()
 
     const dados = {
       card_number: this.form.controls['cartao'].value,
       holder: this.form.controls['nameCartao'].value,
       brand: this.brand,
-      expiration_date: this.form.controls['validade'].value,
-      security_code: this.form.controls['cvc'].value
+      expiration_date: validade
+      // security_code: this.form.controls['cvc'].value
     };
 
     if (
       this.paymentStorage.card_number == dados.card_number &&
       this.paymentStorage.holder == dados.holder &&
       this.paymentStorage.brand == dados.brand &&
-      this.paymentStorage.expiration_date == dados.expiration_date &&
-      this.paymentStorage.security_code == dados.security_code
+      this.paymentStorage.expiration_date == dados.expiration_date
+      // this.paymentStorage.security_code == dados.security_code
     ) {
-      this.localStorageService.setItem('formulario', JSON.stringify(dados));
-      // console.log(JSON.parse(this.localStorageService.getItem('formulario')));
-      this.router.navigateByUrl('/approved-transaction');
+      this.localStorageService.setItem('formulario', JSON.stringify(this.form.value));
+      console.log(JSON.parse(this.localStorageService.getItem('formulario')));
+      console.log('deu bom');
+
+      // this.router.navigateByUrl('/approved-transaction');
     } else {
-      this.router.navigateByUrl('/unauthorized-transaction');
+      console.log('deu ruim');
+
+      // this.router.navigateByUrl('/unauthorized-transaction');
     }
     // setTimeout(() => {
     // }, 50);
