@@ -1,9 +1,14 @@
 @import 'src/styles.scss';
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .comprovante {
-  width: 30vw;
+  width: 20%;
   margin: auto;
-  padding: 2rem 0;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -13,18 +18,40 @@
 .comprovante-mobile {
   width: 90vw;
   margin: auto;
-  padding: 2rem 0;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   text-align: center;
 }
 
-.dadosEntrada {
+.transaction {
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  align-items: center;
+  gap: 0.5rem;
+
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: $cor-sucess;
+
+  .icon-emoji{
+    width: 3rem;
+    height: 3rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+
+    color: $cor-sucess;
+    background-color: rgba(124, 210, 147, 0.33);
+    border-radius: 2rem;
+  }
+}
+
+.dadosEntrada {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
   align-items: flex-start;
   color: $cor-primary-dark;
 
@@ -35,22 +62,79 @@
   }
 
   .txt-destaque {
-    font-weight: 500;
+    font-weight: 900;
   }
 
-  .icon-pay {
-    color: $cor-secondary !important;
-    font-weight: 500;
-  }
+  #icon-pay {
+    width: 3.5rem;
+    height: 1.5rem;
 
-  .transaction {
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 0.65rem;
+    font-weight: 700;
     color: $cor-sucess;
+    background-color: rgba(97, 214, 128, 0.468);
+    border-radius: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.txt-head {
+  color: $cor-secondary;
+  font-weight: 900;
+}
+
+.hr {
+  margin: auto;
+  padding: auto;
+  width: 80%;
+  color: rgba($cor-secondary, 0.75);
+}
+
+.icon {
+  width: 2rem;
+  height: auto;
+}
+
+.comprovante-pagamento {
+  padding: 2rem 1rem;
+  background-color: $cor-body;
+  color: $cor-primary-dark;
+  font-size: 0.75rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: start;
+
+  p {
+    color: $cor-primary-dark !important;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
   }
 
-  .txt-head {
-    color: $cor-secondary;
-    font-weight: 500;
+  .dados {
+    display: flex;
+    justify-content: space-between;
   }
+
+  .destaque {
+    font-weight: 900;
+  }
+
+  .center,
+  .end {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.buttons {
+  width: 90vw;
+  margin: auto;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }

@@ -8,6 +8,8 @@ import { LocalStorageService } from 'src/app/Service/local-storage.service';
 })
 export class ApprovedTransactionComponent implements OnInit {
   form: any;
+  cardIcon: string = 'https://cdn.icon-icons.com/icons2/2342/PNG/512/mastercard_payment_method_icon_142750.png';
+  textCard: string = 'Mastercard';
 
   constructor (private localStorageService: LocalStorageService) {}
 
@@ -15,5 +17,6 @@ export class ApprovedTransactionComponent implements OnInit {
     this.form = JSON.parse(this.localStorageService.getItem('formulario'))
     console.log(this.form);
   }
+
 
 }

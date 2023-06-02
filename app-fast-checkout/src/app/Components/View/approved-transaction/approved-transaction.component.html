@@ -1,39 +1,99 @@
 <!-- MOBILE -->
 <div class="container-fluid vh-100 d-sm-block d-md-none">
-  <app-nav></app-nav>
+  <div class="comprovante-mobile">
+    <div class="transaction">
+      <span class="icon-emoji">
+        <i class="bi bi-emoji-laughing"></i>
+      </span>
+      <span>Transação Aprovada!</span>
+    </div>
 
-  <div class="row">
-    <div class="comprovante-mobile">
-      <div class="transaction">
-        <i></i>
-        <span>Transação Aprovada!</span>
-      </div>
+    <span class="txt-head">O comprovante foi enviado para seu e-mail!</span>
+    <hr class="hr">
 
-      <span class="txt-head">O comprovante foi enviado para seu e-mail!</span>
-
-      <div class="dadosEntrada">
-        <div class="bandeira">
-          <div>
-            <i class="">icon</i>
-            <span class="ps-3 txt-destaque">•••• 5678</span>
-          </div>
-          <span class="icon-pay">Pago</span>
+    <div class="dadosEntrada py-3">
+      <div class="bandeira">
+        <div>
+          <img class="icon" [src]="cardIcon" [alt]="textCard">
+          <span class="ps-3 txt-destaque">•••• 5678</span>
         </div>
-        <span class="">João A Silva</span>
-        <span class="">Parcelas</span>
-        <span class="txt-destaque">21x de R$ 91,66</span>
-        <span class="">Total</span>
-        <span class="txt-destaque">R$ 2.000,00</span>
+        <span id="icon-pay">Pago</span>
       </div>
+      <span class="">João A Silva</span>
+      <span class="txt-small">Parcelas</span>
+      <span class="txt-destaque">21x de R$ 91,66</span>
+      <span class="txt-small">Total</span>
+      <span class="txt-destaque">R$ 2.000,00</span>
+    </div>
+  </div>
 
-      <div>
-        <app-button btnBack="btnBack" dynamicRouteBack="/idClienteInstalacao"></app-button>
-        <app-button btnNext="btnNext"></app-button>
+  <div class="comprovante-pagamento">
+    <p>comprovante de pagamento</p>
+
+    <div>
+      <span class="destaque">Flexpag</span>
+      <div class="dados">
+        <span class="text-uppercase">cnpj</span>
+        <span>123412345678/000011234</span>
+      </div>
+      <div class="dados">
+        <span class="text-uppercase">matrícula</span>
+        <span>1234556</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="row row-cols-3">
+        <div class="col">
+          <span class="destaque">Boleto</span>
+        </div>
+        <div class="col center">
+          <span>Validade</span>
+        </div>
+        <div class="col end">
+          <span>12/12/20</span>
+        </div>
+      </div>
+      <div class="row row-cols-3">
+        <div class="col">
+          <span>8380000000245500030000</span>
+        </div>
+        <div class="col center">
+          <span>Valor</span>
+        </div>
+        <div class="col end">
+          <span>R$ 2000,00</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <span class="destaque text-uppercase">AUTORIZAÇÃO</span>
+      <div class="dados">
+        <span>Número de autorização</span>
+        <span>5432110987</span>
+      </div>
+      <div class="dados">
+        <span class="text-uppercase">CV (NSU)</span>
+        <span>5432110</span>
+      </div>
+      <div class="dados">
+        <span class="text-uppercase">UUID</span>
+        <span>862c60be-4fe5-4685-a35e-9ba44bb43056</span>
+      </div>
+      <div class="dados destaque">
+        <span>Status</span>
+        <span>Aprovada</span>
       </div>
     </div>
   </div>
 
-  <app-footer class="fixed-bottom" [model]="'mobileFooter'"></app-footer>
+  <div class="buttons">
+    <app-button btnNext="btnNext" textNext="Baixar comprovante"></app-button>
+    <app-button btnBack="btnBack" textBack="Pagar outra conta" dynamicRouteBack="/idClienteInstalacao"></app-button>
+  </div>
+
+  <app-footer [model]="'mobileFooter'"></app-footer>
 </div>
 
 <!-- DESKTOP -->
@@ -43,33 +103,97 @@
   <div class="row">
     <div class="comprovante">
       <div class="transaction">
-        <i></i>
+        <span class="icon-emoji">
+          <i class="bi bi-emoji-laughing"></i>
+        </span>
         <span>Transação Aprovada!</span>
       </div>
 
       <span class="txt-head">O comprovante foi enviado para seu e-mail!</span>
 
-      <div class="dadosEntrada">
+      <div class="dadosEntrada px-4">
         <div class="bandeira">
           <div>
-            <i class="">icon</i>
+            <img class="icon" [src]="cardIcon" [alt]="textCard">
             <span class="ps-3 txt-destaque">•••• 5678</span>
           </div>
-          <span class="icon-pay">Pago</span>
+          <span id="icon-pay">Pago</span>
         </div>
         <span class="">João A Silva</span>
-        <span class="">Parcelas</span>
+        <span class="txt-small">Parcelas</span>
         <span class="txt-destaque">21x de R$ 91,66</span>
-        <span class="">Total</span>
+        <span class="txt-small">Total</span>
         <span class="txt-destaque">R$ 2.000,00</span>
       </div>
 
+      <div class="comprovante-pagamento rounded-4 px-4">
+        <p class="text-center">comprovante de pagamento</p>
+
+        <div>
+          <span class="destaque">Flexpag</span>
+          <div class="dados">
+            <span class="text-uppercase">cnpj</span>
+            <span>123412345678/000011234</span>
+          </div>
+          <div class="dados">
+            <span class="text-uppercase">matrícula</span>
+            <span>1234556</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="row row-cols-3">
+            <div class="col">
+              <span class="destaque">Boleto</span>
+            </div>
+            <div class="col center">
+              <span>Validade</span>
+            </div>
+            <div class="col end">
+              <span>12/12/20</span>
+            </div>
+          </div>
+          <div class="row row-cols-3">
+            <div class="col">
+              <span>8380000000245500030000</span>
+            </div>
+            <div class="col center">
+              <span>Valor</span>
+            </div>
+            <div class="col end">
+              <span>R$ 2000,00</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="destaque text-uppercase">AUTORIZAÇÃO</span>
+          <div class="dados">
+            <span>Número de autorização</span>
+            <span>5432110987</span>
+          </div>
+          <div class="dados">
+            <span class="text-uppercase">CV (NSU)</span>
+            <span>5432110</span>
+          </div>
+          <div class="dados">
+            <span class="text-uppercase">UUID</span>
+            <span>862c60be-4fe5-4685-a35e-9ba44bb43056</span>
+          </div>
+          <div class="dados destaque">
+            <span>Status</span>
+            <span>Aprovada</span>
+          </div>
+        </div>
+      </div>
+
       <div class="d-flex gap-3 px-2">
-        <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/idClienteInstalacao"></app-button>
-        <app-button class="flex-grow-1" btnNext="btnNext"></app-button>
+        <app-button class="flex-grow-1" btnBack="btnBack" textBack="Pagar outra conta"
+          dynamicRouteBack="/idClienteInstalacao"></app-button>
+        <app-button class="flex-grow-1" btnNext="btnNext" textNext="Baixar comprovante"></app-button>
       </div>
     </div>
   </div>
 
-  <app-footer class="fixed-bottom" [model]="'desktopFooter'"></app-footer>
+  <app-footer [model]="'desktopFooter'"></app-footer>
 </div>
