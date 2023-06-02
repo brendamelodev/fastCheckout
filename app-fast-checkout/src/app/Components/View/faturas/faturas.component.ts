@@ -74,6 +74,7 @@ export class FaturasComponent implements OnInit {
 
   avancar() {
     this.getInstallments();
+    this.getPayment()
     setTimeout(() => {
       this.router.navigateByUrl('/pagamento');
     }, 50);
@@ -87,4 +88,14 @@ export class FaturasComponent implements OnInit {
         }
       });
   }
+
+  getPayment() {
+    this.apiService.getPayment().subscribe({
+      next: data => {
+        this.localStorageService.setItem('payment', JSON.stringify(data));
+      },
+      error: error => console.log(error)
+    })
+  }
+
 }
