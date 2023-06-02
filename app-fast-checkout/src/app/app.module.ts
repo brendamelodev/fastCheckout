@@ -27,6 +27,8 @@ import { LoadingComponent } from './Components/loading/loading.component';
 import { LoadingInterceptor } from './Interceptors/loading.interceptor';
 import { StepComponent } from './Components/step/step.component';
 import { CartaoPipe } from './Pipes/cartao.pipe';
+import { ApprovedTransactionComponent } from './Components/View/approved-transaction/approved-transaction.component';
+import { UnauthorizedTransactionComponent } from './Components/View/unauthorized-transaction/unauthorized-transaction.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { CartaoPipe } from './Pipes/cartao.pipe';
     NamePipe,
     LoadingComponent,
     StepComponent,
-    CartaoPipe
+    CartaoPipe,
+    ApprovedTransactionComponent,
+    UnauthorizedTransactionComponent
   ],
   imports: [
     BrowserModule,
