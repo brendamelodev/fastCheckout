@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
@@ -13,7 +13,7 @@ import { LocalStorageService } from 'src/app/Service/local-storage.service';
   templateUrl: './id-cliente-p1.component.html',
   styleUrls: ['./id-cliente-p1.component.scss']
 })
-export class IdClienteP1Component {
+export class IdClienteP1Component implements OnInit {
   contractAccount!: ContractAccount;
   subscription?: Subscription;
   cpf: string = '';
@@ -27,6 +27,11 @@ export class IdClienteP1Component {
     private dataService: DataService,
     private localStorageService: LocalStorageService
   ) { }
+
+  ngOnInit(): void {
+    // this.dataService.contractAccount$.push(JSON.parse(this.localStorageService.getItem('contractAccount')));
+    this.localStorageService.clear();
+  }
 
   form: FormGroup = this.fb.group({
     document: ['', [Validators.required, Validators.minLength(11)]],
@@ -52,12 +57,10 @@ export class IdClienteP1Component {
               if (Object.keys(data).length === 0) {
                 this.msgErro = 'Ops, ocorreu um erro. Seu cadastro não foi encontrado!';
               } else {
-                this.contractAccount = data;
-                this.dataService.setDataAccountContract(data);
-                this.router.navigate(['idClienteInstalacao']);
-
                 this.localStorageService.clear();
                 this.localStorageService.setItem('contractAccount', JSON.stringify(data));
+                this.router.navigate(['idClienteInstalacao']);
+                // this.dataService.contractAccount$.push(data);
               }
             }
           }
