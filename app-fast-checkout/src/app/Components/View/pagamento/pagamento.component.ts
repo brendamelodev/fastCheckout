@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/Service/api.service';
-import { DataService } from 'src/app/Service/data.service';
+import { LocalStorageService } from 'src/app/Service/local-storage.service';
 
 @Component({
   selector: 'app-pagamento',
@@ -12,11 +13,6 @@ import { DataService } from 'src/app/Service/data.service';
 export class PagamentoComponent implements OnInit {
   subscription?: Subscription;
   selectedPaymentType: string = 'Cartão de Crédito';
-  accountContract!: any;
-  invoiceById?: any;
-  totalAmount: number = 0;
-  installments?: any;
-  selectedInstallment: any;
   msgErrorValidade = '';
   cardIcon: string = '';
   textCard: string = '';
@@ -26,8 +22,13 @@ export class PagamentoComponent implements OnInit {
     { classIcon: 'bi bi-cash-coin', type: 'Cartão de Débito Virtual Caixa', description: 'Bolsa Família' },
     { classIcon: 'bi bi-x-diamond-fill', type: 'Pagamento Instantâneo', description: 'PIX' }
   ];
+  accountContractStorage: any;
+  invoiceByIdStorage: any;
+  totalAmountStorage: any;
+  installmentsStorage: any;
+  selectedInstallmentStorage: any;
 
-  constructor(private dataService: DataService, private fb: FormBuilder, private apiService: ApiService) { }
+  constructor(private localStorageService: LocalStorageService, private fb: FormBuilder, private router: Router, private apiService: ApiService) { }
 
   form: FormGroup = this.fb.group({
     cartao: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(17)]],
@@ -41,12 +42,16 @@ export class PagamentoComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.totalAmount = this.dataService.getTotalAmount();
-    this.invoiceById = this.dataService.getInvoiceById();
-    this.dataService.dataAccountContract$.subscribe(data => {
-      this.accountContract = data;
-    });
-    this.getInstallments();
+    this.accountContractStorage = JSON.parse(this.localStorageService.getItem('contractAccount'));
+    this.invoiceByIdStorage = JSON.parse(this.localStorageService.getItem('invoiceById'));
+    this.totalAmountStorage = JSON.parse(this.localStorageService.getItem('totalAmount'));
+    this.installmentsStorage = JSON.parse(this.localStorageService.getItem('installments'));
+
+    this.getPayment();
+
+    setTimeout(() => {
+      this.onFormSubmit();
+    }, 50);
   }
 
   selectPaymentType(type: string) {
@@ -81,13 +86,6 @@ export class PagamentoComponent implements OnInit {
     return description;
   }
 
-  getInstallments() {
-    this.subscription = this.apiService.getInstallments().subscribe(
-      {
-        next: data => this.installments = data
-      });
-  }
-
   unsubscribe() {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -96,7 +94,9 @@ export class PagamentoComponent implements OnInit {
   }
 
   updateSelectedInstallment(value: any, key: any) {
-    this.selectedInstallment = { key, value };
+    // this.selectedInstallment = { key, value };
+    this.localStorageService.setItem(key, JSON.stringify({ value }));
+    this.selectedInstallmentStorage = JSON.parse(this.localStorageService.getItem(key));
   }
 
   sortedKeys(obj: any): string[] {
@@ -142,24 +142,90 @@ export class PagamentoComponent implements OnInit {
     const formatDate = date.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
     const parts = formatDate.split("-");
     const dateNow = `${parts[1]}/${parts[2].slice(-2)}`;
-    console.log(dateNow)
 
     const dateAtual = new Date(Number(parts[2].slice(0, 2)) + dateNow.slice(3) + "-" + dateNow.slice(0, 2) + "-01");
-    console.log(dateAtual)
 
     if (control.length == 4) {
       const dataInput = `${control.substr(0, 2)}/${control.substr(2, 2)}`;
 
       const dateDigitado = new Date(Number(parts[2].slice(0, 2)) + dataInput.slice(3) + "-" + dataInput.slice(0, 2) + "-01");
-      console.log(dateDigitado)
 
       if (dateDigitado < dateAtual || control.length < 4) {
         this.validade = true;
-        console.log('data invalida');
       } else {
         this.validade = false;
-        console.log('deu bom');
       }
     }
   }
+
+
+  result!: boolean;
+  dados: any;
+  getPayment() {
+    // const cardNumber = '5333027168283786';
+    // const holder = 'Mariane G Galvao';
+    // const brand = 'MASTER';
+    // const expirationDate = '05/2025';
+    // const securityCode = '512';
+
+    // const cardNumber = '5151515151551515';
+    // const holder = 'teste';
+    // const brand = 'MASTER';
+    // const expirationDate = '10/2029';
+    // const securityCode = '123';
+
+    // const cardNumber = '';
+    // const holder = '';
+    // const brand = '';
+    // const expirationDate = '';
+    // const securityCode = '';
+    // cardNumber, holder, brand, expirationDate, securityCode
+    this.apiService.getPayment().subscribe({
+      next: data => {
+        this.dados = data;
+        // console.log(data);
+
+        //   console.log(Object.keys(data).length);
+
+        //   if (Object.keys(data).length === 0) {
+        //     console.log('erro');
+        //     return this.result = false
+        //   } else {
+        //     console.log("'true'");
+        //     return this.result = true
+        //   }
+      },
+      error: error => console.log(error)
+    })
+  }
+
+  onFormSubmit() {
+    const form = {
+      card_number: '5151515151551515',
+      holder: 'teste',
+      brand: 'MASTER',
+      expiration_date: '10/2029',
+      security_code: '123'
+    };
+
+    if (
+      this.dados.card_number == form.card_number &&
+      this.dados.holder == form.holder &&
+      this.dados.brand == form.brand &&
+      this.dados.expiration_date == form.expiration_date &&
+      this.dados.security_code == form.security_code
+      ) {
+      console.log('/approved-transaction');
+      this.localStorageService.setItem('formulario', JSON.stringify( this.form.value ));
+      console.log(JSON.parse(this.localStorageService.getItem('formulario')));
+      // this.router.navigateByUrl('/approved-transaction');
+    } else {
+      console.log('/unauthorized-transaction');
+      // this.router.navigateByUrl('/unauthorized-transaction');
+    }
+
+    // setTimeout(() => {
+    // }, 50);
+  }
+
 }

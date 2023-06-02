@@ -6,7 +6,7 @@
   <div class="row row-mobile d-flex align-items-center">
     <div class="col-5">
       <p class="txt-small text-uppercase">cpf</p>
-      <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
+      <p class="fs-6 txt-contrast" *ngFor="let account of accountContractStorage">{{ account.document | cpf }}</p>
     </div>
     <div class="col-1 p-0">
       <div class="d-flex">
@@ -15,7 +15,11 @@
     </div>
     <div class="col-6">
       <p class="txt-small text-uppercase">código do cliente</p>
-      <p class="fs-6 txt-contrast" *ngIf="invoiceById">{{invoiceById[0].invoiceId}}</p>
+      <p class="fs-6 txt-contrast" *ngFor="let invoice of invoiceByIdStorage">
+        <span *ngIf="invoice">
+          {{invoice.invoiceId}}
+        </span>
+      </p>
     </div>
   </div>
 
@@ -120,8 +124,9 @@
     <div class="row row-mobile mb-0 pb-0">
       <div class="col-8">
         <p class="txt-small">Parcelas</p>
-        <p id="parcelas">{{ selectedInstallment ? selectedInstallment.key + 'x de R$ ' + selectedInstallment.value :
-          (installments | keyvalue)[0].key + 'x de R$ ' + (installments | keyvalue)[0].value }}</p>
+        <p id="parcelas">{{ selectedInstallmentStorage ? selectedInstallmentStorage.key + 'x de R$ ' +
+          selectedInstallmentStorage.value :
+          (installmentsStorage | keyvalue)[0].key + 'x de R$ ' + (installmentsStorage | keyvalue)[0].value }}</p>
       </div>
       <div class="col-4 d-flex align-items-end justify-content-end">
         <span class="navbar p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
@@ -135,21 +140,21 @@
     </div>
 
     <!-- Dropdown alterar parcelas -->
-    <div class="row row-mobile" *ngIf="installments">
+    <div class="row row-mobile" *ngIf="installmentsStorage">
       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <hr>
         <ul class="navbar-nav d-flex flex-column gap-2">
           <li class="nav-item dropdown d-flex flex-column align-items-center"
-            *ngFor="let key of sortedKeys(installments)">
+            *ngFor="let key of sortedKeys(installmentsStorage)">
             <div class="parcelamento" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
               aria-controls="navbarNavDarkDropdown" aria-expanded="false">
               <label [for]="'radioNoLabel' + key">
                 <span class="numbParcela">{{ key }}x de</span>
-                <span class="valorParcela">R$ {{installments[key]}}</span>
+                <span class="valorParcela">R$ {{installmentsStorage[key]}}</span>
                 <span class="txt-small">com taxas</span>
               </label>
               <input class="form-check-input" type="radio" [name]="'radioNoLabel'" [id]="'radioNoLabel' + key"
-                [value]="installments[key]" (change)="updateSelectedInstallment(installments[key], key)">
+                [value]="installmentsStorage[key]" (change)="updateSelectedInstallment(installmentsStorage[key], key)">
             </div>
           </li>
         </ul>
@@ -161,12 +166,57 @@
   <div *ngIf="selectedPaymentType === 'Cartão de Débito Virtual Caixa'">
     <div class="row row-mobile">
       <p class="txt-contrast pb-2">Dados do cartão de dédito</p>
-      <form>
-        <!-- <app-input inputType="number" placeholderText="número do cartão"></app-input> -->
-        <!-- <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input> -->
+      <form [formGroup]="form">
+        <div class="input-group">
+          <input class="input-icon" type="text" placeholder="número do cartão" formControlName="cartao"
+            mask="0000 0000 0000 0000||0000 000000 00000||0000 000000 0000||0000 0000000 0000||00000 0000 00000 0"
+            (input)="validateCardNumber(form.controls['cartao'].value)">
+          <span class="icon-input">
+            <img [src]="cardIcon" [alt]="textCard">
+          </span>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="span" *ngIf="textCard == 'Cartão Inválido'">*{{ textCard }}</span>
+          <div *ngIf="form.controls['cartao'].invalid && form.controls['cartao'].touched">
+            <span class="span" *ngIf="form.controls['cartao'].errors?.['required']">*Número do Cartão
+              Obrigratório</span>
+            <span class="span" *ngIf="form.controls['cartao'].errors?.['minLength']">*O cartão deve conter no
+              mínimo 14 dígitos</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao">
+        </div>
+        <span class="span" *ngIf="form.controls['nameCartao'].invalid && form.controls['nameCartao'].touched">*Nome
+          impresso
+          Obrigratório</span>
+
         <div class="d-flex gap-2">
-          <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input> -->
-          <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input> -->
+          <div class="input-group">
+            <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="M0/00"
+              (input)="validateCardValidade(form.controls['validade'].value)">
+          </div>
+
+          <div class="input-group">
+            <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="0000||000">
+            <span class="icon-input">
+              <i class="bi bi-info-circle-fill"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <span class="span" *ngIf="validade == true">*Data inválida</span>
+
+          <div *ngIf="form.controls['validade'].invalid && form.controls['validade'].touched">
+            <span class="span" *ngIf="form.controls['validade'].errors?.['required']">*Validade do Cartão
+              Obrigratório</span>
+          </div>
+
+          <div *ngIf="form.controls['cvc'].invalid && form.controls['cvc'].touched">
+            <span class="span" *ngIf="form.controls['cvc'].errors?.['required']">*CVC Obrigratório</span>
+          </div>
         </div>
       </form>
     </div>
@@ -174,11 +224,11 @@
     <div class="row row-mobile mb-0 pb-0">
       <div class="col-6 pb-4 d-flex flex-column gap-1">
         <p class="txt-small m-0">Valor total das faturas</p>
-        <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+        <p class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
       </div>
       <div class="col-6 pb-4 d-flex flex-column gap-1">
         <p class="txt-small m-0">Valor total do pagamento</p>
-        <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+        <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
       </div>
     </div>
   </div>
@@ -206,11 +256,11 @@
     <div class="row row-mobile mb-0 pb-0">
       <div class="col-6 pb-4 d-flex flex-column gap-1">
         <p class="txt-small m-0">Valor total das faturas</p>
-        <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+        <p class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
       </div>
       <div class="col-6 pb-4 d-flex flex-column gap-1">
         <p class="txt-small m-0">Valor total do pagamento</p>
-        <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+        <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
       </div>
     </div>
   </div>
@@ -244,7 +294,7 @@
   </div>
 
   <div class="row row-mobile background-light">
-    <app-button btnPay="btnPay" dynamicRoutePay="/" [disabled]="form.invalid"></app-button>
+    <app-button btnPay="btnPay" (click)="onFormSubmit()" [disabled]="form.invalid"></app-button>
     <app-button btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
   </div>
 
@@ -376,8 +426,11 @@
             <p class="fs-6 text-uppercase fw-bold">escolha em quantas vezes pagar</p>
             <p class="txt-small fw-bold">Parcelas de apenas:</p>
             <div class="d-flex align-items-center justify-content-between">
-              <p id="parcelas">{{ selectedInstallment ? selectedInstallment.key + 'x de R$ ' + selectedInstallment.value
-                : (installments | keyvalue)[0].key + 'x de R$ ' + (installments | keyvalue)[0].value }}</p>
+              <p id="parcelas">
+                {{ selectedInstallmentStorage ? selectedInstallmentStorage.key + 'x de R$ ' +
+                selectedInstallmentStorage.value
+                : (installmentsStorage | keyvalue)[0].key + 'x de R$ ' + (installmentsStorage | keyvalue)[0].value }}
+              </p>
               <div class="d-flex align-items-end justify-content-end">
                 <span class="navbar p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
                   aria-controls="navbarNavDarkDropdown" aria-expanded="false">
@@ -390,25 +443,24 @@
             </div>
 
             <!-- Dropdown alterar parcelas -->
-            <div *ngIf="installments">
-              <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                <hr>
-                <ul class="navbar-nav d-flex flex-column gap-2">
-                  <li class="nav-item dropdown d-flex flex-column align-items-center"
-                    *ngFor="let key of sortedKeys(installments)">
-                    <div class="parcelamento" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
-                      aria-controls="navbarNavDarkDropdown" aria-expanded="false">
-                      <label [for]="'radioNoLabel' + key">
-                        <span class="numbParcela">{{ key }}x de</span>
-                        <span class="valorParcela">R$ {{installments[key]}}</span>
-                        <span class="txt-small">com taxas</span>
-                      </label>
-                      <input class="form-check-input" type="radio" [name]="'radioNoLabel'" [id]="'radioNoLabel' + key"
-                        [value]="installments[key]" (change)="updateSelectedInstallment(installments[key], key)">
-                    </div>
-                  </li>
-                </ul>
-              </div>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" *ngIf="installmentsStorage">
+              <hr>
+              <ul class="navbar-nav d-flex flex-column gap-2">
+                <li class="nav-item dropdown d-flex flex-column align-items-center"
+                  *ngFor="let key of sortedKeys(installmentsStorage)">
+                  <div class="parcelamento" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+                    aria-controls="navbarNavDarkDropdown" aria-expanded="false">
+                    <label [for]="'radioNoLabel' + key">
+                      <span class="numbParcela">{{ key }}x de</span>
+                      <span class="valorParcela">R$ {{installmentsStorage[key]}}</span>
+                      <span class="txt-small">com taxas</span>
+                    </label>
+                    <input class="form-check-input" type="radio" [name]="'radioNoLabel'" [id]="'radioNoLabel' + key"
+                      [value]="installmentsStorage[key]"
+                      (change)="updateSelectedInstallment(installmentsStorage[key], key)">
+                  </div>
+                </li>
+              </ul>
             </div>
 
             <div divisoria class="hr">
@@ -418,13 +470,15 @@
             <div class="d-flex justify-content-between">
               <div class="pb-4 d-flex flex-column gap-1">
                 <p class="txt-small m-0">Valor total das faturas</p>
-                <p class="fw-bold m-0 fs-5">{{ selectedInstallment ? 'R$ ' + selectedInstallment.value : 'R$ ' +
-                  (installments | keyvalue)[0].value }}</p>
+                <p class="fw-bold m-0 fs-5">{{ selectedInstallmentStorage ? 'R$ ' + selectedInstallmentStorage.value :
+                  'R$ ' +
+                  (installmentsStorage | keyvalue)[0].value }}</p>
               </div>
               <div class="pb-4 d-flex flex-column gap-1">
                 <p class="txt-small m-0">Valor total do pagamento</p>
-                <p id="parcelas" class="fw-bold m-0 fs-5">{{ selectedInstallment ? 'R$ ' + selectedInstallment.value :
-                  'R$ ' + (installments | keyvalue)[0].value }}</p>
+                <p id="parcelas" class="fw-bold m-0 fs-5">{{ selectedInstallmentStorage ? 'R$ ' +
+                  selectedInstallmentStorage.value :
+                  'R$ ' + (installmentsStorage | keyvalue)[0].value }}</p>
               </div>
             </div>
           </div>
@@ -434,12 +488,57 @@
         <div *ngIf="selectedPaymentType === 'Cartão de Débito Virtual Caixa'">
           <div class="background rounded-3 p-3">
             <p class="txt-contrast pb-2">Dados do cartão de dédito</p>
-            <form>
-              <!-- <app-input inputType="number" placeholderText="número do cartão"></app-input> -->
-              <!-- <app-input inputType="text" placeholderText="nome impresso no cartão"></app-input> -->
+            <form [formGroup]="form">
+              <div class="input-group">
+                <input class="input-icon" type="text" placeholder="número do cartão" formControlName="cartao"
+                  mask="0000 0000 0000 0000||0000 000000 00000||0000 000000 0000||0000 0000000 0000||00000 0000 00000 0"
+                  (input)="validateCardNumber(form.controls['cartao'].value)">
+                <span class="icon-input">
+                  <img [src]="cardIcon" [alt]="textCard">
+                </span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="span" *ngIf="textCard == 'Cartão Inválido'">*{{ textCard }}</span>
+                <div *ngIf="form.controls['cartao'].invalid && form.controls['cartao'].touched">
+                  <span class="span" *ngIf="form.controls['cartao'].errors?.['required']">*Número do Cartão
+                    Obrigratório</span>
+                  <span class="span" *ngIf="form.controls['cartao'].errors?.['minLength']">*O cartão deve conter no
+                    mínimo 14 dígitos</span>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <input class="input" type="text" placeholder="nome impresso no cartão" formControlName="nameCartao">
+              </div>
+              <span class="span"
+                *ngIf="form.controls['nameCartao'].invalid && form.controls['nameCartao'].touched">*Nome impresso
+                Obrigratório</span>
+
               <div class="d-flex gap-2">
-                <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="validade mm/aa"></app-input> -->
-                <!-- <app-input class="flex-grow-1" inputType="number" placeholderText="cvc"></app-input> -->
+                <div class="input-group">
+                  <input class="input" type="text" placeholder="validade mm/aa" formControlName="validade" mask="M0/00"
+                    (input)="validateCardValidade(form.controls['validade'].value)">
+                </div>
+
+                <div class="input-group">
+                  <input class="input-icon" type="text" placeholder="cvc" formControlName="cvc" mask="0000||000">
+                  <span class="icon-input">
+                    <i class="bi bi-info-circle-fill"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <span class="span" *ngIf="validade == true">*Data inválida</span>
+
+                <div *ngIf="form.controls['validade'].invalid && form.controls['validade'].touched">
+                  <span class="span" *ngIf="form.controls['validade'].errors?.['required']">*Validade do Cartão
+                    Obrigratório</span>
+                </div>
+
+                <div *ngIf="form.controls['cvc'].invalid && form.controls['cvc'].touched">
+                  <span class="span" *ngIf="form.controls['cvc'].errors?.['required']">*CVC Obrigratório</span>
+                </div>
               </div>
             </form>
           </div>
@@ -448,11 +547,11 @@
             <div class="d-flex">
               <div class="col-6 pb-4 d-flex flex-column gap-1">
                 <p class="txt-small m-0">Valor total das faturas</p>
-                <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+                <p class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
               </div>
               <div class="col-6 pb-4 d-flex flex-column gap-1">
                 <p class="txt-small m-0">Valor total do pagamento</p>
-                <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+                <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
               </div>
             </div>
           </div>
@@ -482,11 +581,11 @@
             <div class="d-flex">
               <div class="col-6 pb-4 d-flex flex-column gap-1">
                 <p class="txt-small m-0">Valor total das faturas</p>
-                <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+                <p class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
               </div>
               <div class="col-6 pb-4 d-flex flex-column gap-1">
                 <p class="txt-small m-0">Valor total do pagamento</p>
-                <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+                <p id="parcelas" class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
               </div>
             </div>
           </div>
@@ -522,7 +621,7 @@
 
         <div class="d-flex gap-3">
           <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/faturas"></app-button>
-          <app-button class="flex-grow-1" btnPay="btnPay" dynamicRoutePay="/" [disabled]="form.invalid"></app-button>
+          <app-button class="flex-grow-1" btnPay="btnPay" (click)="onFormSubmit()" [disabled]="form.invalid"></app-button>
         </div>
 
       </div>
@@ -534,9 +633,13 @@
         <div class="campos mt-4">
           <div class="d-flex flex-column gap-2">
             <p class="txt-small text-uppercase">cpf</p>
-            <p class="fs-6 txt-contrast">{{ accountContract[0].document | cpf }}</p>
+            <p class="fs-6 txt-contrast" *ngFor="let account of accountContractStorage">{{ account.document | cpf }}</p>
             <p class="txt-small text-uppercase">código do cliente</p>
-            <p class="fs-6 txt-contrast" *ngIf="invoiceById">{{invoiceById[0].invoiceId}}</p>
+            <p class="fs-6 txt-contrast" *ngFor="let invoice of invoiceByIdStorage">
+              <span *ngIf="invoice">
+                {{invoice.invoiceId}}
+              </span>
+            </p>
           </div>
         </div>
 
@@ -544,7 +647,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <div class="pb-4 d-flex flex-column gap-1">
               <p class="txt-small m-0">Valor total das faturas</p>
-              <p class="fw-bold m-0 fs-5">R$ {{ totalAmount.toFixed(2) }}</p>
+              <p class="fw-bold m-0 fs-5">R$ {{ totalAmountStorage.toFixed(2) }}</p>
             </div>
             <div class="d-flex align-items-end justify-content-end">
               <span class="navbar p-0" type="button" data-bs-toggle="collapse"
@@ -559,25 +662,24 @@
           </div>
 
           <!-- Dropdown faturas -->
-          <div *ngIf="installments">
+          <div *ngIf="installmentsStorage">
             <div class="collapse navbar-collapse" id="navbarNavDarkDropdownFaturas">
               <hr>
-              <div class="d-flex flex-column" *ngIf="invoiceById[0].selected">
+              <div class="d-flex flex-column" *ngIf="invoiceByIdStorage.selected">
                 <div class="d-flex justify-content-between">
-                  <p class="fw-bold m-0 fs-6">{{ invoiceById[0].invoiceId }}</p>
-                  <p class="fw-bold m-0 fs-6">R$ {{ invoiceById[0].amount.toFixed(2) }}</p>
+                  <p class="fw-bold m-0 fs-6">{{ invoiceByIdStorage.invoiceId }}</p>
+                  <p class="fw-bold m-0 fs-6">R$ {{ invoiceByIdStorage.amount.toFixed(2) }}</p>
                 </div>
-                <p class="txt-small m-0 text-uppercase opacity-50">vencimento {{invoiceById[0].dueDate | date:
+                <p class="txt-small m-0 text-uppercase opacity-50">vencimento {{invoiceByIdStorage.dueDate | date:
                   'dd/MM/yyyy'}}</p>
               </div>
             </div>
             <div class="d-flex flex-column align-items-end justify-content-end gap-1 pt-3">
               <p class="m-0">Valor total das faturas</p>
-              <p class="fw-bold m-0 fs-6">R$ {{ totalAmount.toFixed(2) }}</p>
+              <p class="fw-bold m-0 fs-6">R$ {{ totalAmountStorage.toFixed(2) }}</p>
             </div>
           </div>
         </div>
-
         <div class="campos" *ngIf="selectedPaymentType != 'Pagamento Instantâneo'">
           <div class="d-flex flex-column gap-3">
             <p class="txt-contrast">Cartão Utilizado</p>
