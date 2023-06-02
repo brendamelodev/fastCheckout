@@ -1,9 +1,9 @@
 <button type="button" class="btn mb-3 buttonNext" *ngIf="btnNext === 'btnNext'" [routerLink]="dynamicRouteNext" [disabled]="disabled">
-  Avançar
+  {{textNext}}
 </button>
 <button type="button" class="btn mb-3 buttonBack" *ngIf="btnBack === 'btnBack'" [routerLink]="dynamicRouteBack" [disabled]="disabled">
-  Voltar
+  {{textBack}}
 </button>
 <button type="button" class="btn mb-3 buttonPay" *ngIf="btnPay === 'btnPay'" [routerLink]="dynamicRoutePay" [disabled]="disabled">
-  Pagar
+  {{textPay}}
 </button>
