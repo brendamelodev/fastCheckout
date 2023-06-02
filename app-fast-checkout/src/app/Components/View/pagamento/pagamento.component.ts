@@ -188,7 +188,7 @@ export class PagamentoComponent implements OnInit {
       this.paymentStorage.expiration_date == dados.expiration_date
       // this.paymentStorage.security_code == dados.security_code
     ) {
-      this.localStorageService.setItem('formulario', JSON.stringify(this.form.value));
+      this.localStorageService.setItem('formulario', JSON.stringify(dados));
       console.log(JSON.parse(this.localStorageService.getItem('formulario')));
       console.log('deu bom');
 
