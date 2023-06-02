@@ -27,6 +27,8 @@ export class PagamentoComponent implements OnInit {
   totalAmountStorage: any;
   installmentsStorage: any;
   selectedInstallmentStorage: any;
+  paymentStorage: any;
+  brand: string = '';
 
   constructor(private localStorageService: LocalStorageService, private fb: FormBuilder, private router: Router, private apiService: ApiService) { }
 
@@ -46,12 +48,7 @@ export class PagamentoComponent implements OnInit {
     this.invoiceByIdStorage = JSON.parse(this.localStorageService.getItem('invoiceById'));
     this.totalAmountStorage = JSON.parse(this.localStorageService.getItem('totalAmount'));
     this.installmentsStorage = JSON.parse(this.localStorageService.getItem('installments'));
-
-    this.getPayment();
-
-    setTimeout(() => {
-      this.onFormSubmit();
-    }, 50);
+    this.paymentStorage = JSON.parse(this.localStorageService.getItem('payment'));
   }
 
   selectPaymentType(type: string) {
@@ -111,6 +108,7 @@ export class PagamentoComponent implements OnInit {
     } else if (['51', '52', '53', '54', '55'].some(prefix => cardNumber.startsWith(prefix))) {
       this.cardIcon = 'https://cdn.icon-icons.com/icons2/2342/PNG/512/mastercard_payment_method_icon_142750.png';
       this.textCard = 'Mastercard';
+      this.brand = 'MASTER';
     } else if (['34', '37'].some(prefix => cardNumber.startsWith(prefix))) {
       this.cardIcon = 'https://cdn-icons-png.flaticon.com/512/349/349228.png';
       this.textCard = 'American Express';
@@ -158,72 +156,36 @@ export class PagamentoComponent implements OnInit {
     }
   }
 
-
-  result!: boolean;
-  dados: any;
-  getPayment() {
-    // const cardNumber = '5333027168283786';
-    // const holder = 'Mariane G Galvao';
-    // const brand = 'MASTER';
-    // const expirationDate = '05/2025';
-    // const securityCode = '512';
-
-    // const cardNumber = '5151515151551515';
-    // const holder = 'teste';
-    // const brand = 'MASTER';
-    // const expirationDate = '10/2029';
-    // const securityCode = '123';
-
-    // const cardNumber = '';
-    // const holder = '';
-    // const brand = '';
-    // const expirationDate = '';
-    // const securityCode = '';
-    // cardNumber, holder, brand, expirationDate, securityCode
-    this.apiService.getPayment().subscribe({
-      next: data => {
-        this.dados = data;
-        // console.log(data);
-
-        //   console.log(Object.keys(data).length);
-
-        //   if (Object.keys(data).length === 0) {
-        //     console.log('erro');
-        //     return this.result = false
-        //   } else {
-        //     console.log("'true'");
-        //     return this.result = true
-        //   }
-      },
-      error: error => console.log(error)
-    })
-  }
-
   onFormSubmit() {
-    const form = {
-      card_number: '5151515151551515',
-      holder: 'teste',
-      brand: 'MASTER',
-      expiration_date: '10/2029',
-      security_code: '123'
+    // const form = {
+    //   card_number: '5151515151551515',
+    //   holder: 'teste',
+    //   brand: 'MASTER',
+    //   expiration_date: '10/2029',
+    //   security_code: '123'
+    // };
+
+    const dados = {
+      card_number: this.form.controls['cartao'].value,
+      holder: this.form.controls['nameCartao'].value,
+      brand: this.brand,
+      expiration_date: this.form.controls['validade'].value,
+      security_code: this.form.controls['cvc'].value
     };
 
     if (
-      this.dados.card_number == form.card_number &&
-      this.dados.holder == form.holder &&
-      this.dados.brand == form.brand &&
-      this.dados.expiration_date == form.expiration_date &&
-      this.dados.security_code == form.security_code
-      ) {
-      console.log('/approved-transaction');
-      this.localStorageService.setItem('formulario', JSON.stringify( this.form.value ));
-      console.log(JSON.parse(this.localStorageService.getItem('formulario')));
-      // this.router.navigateByUrl('/approved-transaction');
+      this.paymentStorage.card_number == dados.card_number &&
+      this.paymentStorage.holder == dados.holder &&
+      this.paymentStorage.brand == dados.brand &&
+      this.paymentStorage.expiration_date == dados.expiration_date &&
+      this.paymentStorage.security_code == dados.security_code
+    ) {
+      this.localStorageService.setItem('formulario', JSON.stringify(dados));
+      // console.log(JSON.parse(this.localStorageService.getItem('formulario')));
+      this.router.navigateByUrl('/approved-transaction');
     } else {
-      console.log('/unauthorized-transaction');
-      // this.router.navigateByUrl('/unauthorized-transaction');
+      this.router.navigateByUrl('/unauthorized-transaction');
     }
-
     // setTimeout(() => {
     // }, 50);
   }
