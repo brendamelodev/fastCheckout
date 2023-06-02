@@ -3,7 +3,8 @@
   <app-nav></app-nav>
 
 
-  <app-button btnBack="btnBack" dynamicRouteBack="/idClienteP1"></app-button>
+  <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/idClienteInstalacao"></app-button>
+  <app-button class="flex-grow-1" btnNext="btnNext"></app-button>
 </div>
 
 <!-- DESKTOP -->
@@ -12,27 +13,32 @@
 
   <div class="row">
     <div class="comprovante">
-      <i></i>
-      <span>Transação Aprovada!</span>
-      <span>O comprovante foi enviado para seu e-mail!</span>
-
-      <div class="dadosEntrada">
-        <div class="d-flex">
-          <div>
-            <i>asdasd</i>
-            <span class="ps-3">•••• 5678</span>
-          </div>
-          <span>Pago</span>
-        </div>
-        <span>João A Silva</span>
-        <span>Parcelas</span>
-        <span>21x de R$ 91,66</span>
-        <span>Total</span>
-        <span>R$ 2.000,00</span>
+      <div class="transaction">
+        <i></i>
+        <span>Transação Aprovada!</span>
       </div>
 
+      <span class="txt-head">O comprovante foi enviado para seu e-mail!</span>
 
-      <app-button btnBack="btnBack" dynamicRouteBack="/idClienteP1"></app-button>
+      <div class="dadosEntrada">
+        <div class="bandeira">
+          <div>
+            <i class="">icon</i>
+            <span class="ps-3 txt-destaque">•••• 5678</span>
+          </div>
+          <span class="icon-pay">Pago</span>
+        </div>
+        <span class="">João A Silva</span>
+        <span class="">Parcelas</span>
+        <span class="txt-destaque">21x de R$ 91,66</span>
+        <span class="">Total</span>
+        <span class="txt-destaque">R$ 2.000,00</span>
+      </div>
+
+      <div class="d-flex gap-3 px-2">
+        <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/idClienteInstalacao"></app-button>
+        <app-button class="flex-grow-1" btnNext="btnNext"></app-button>
+      </div>
     </div>
   </div>
 

@@ -10,9 +10,37 @@
   text-align: center;
 
   .dadosEntrada {
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
+    color: $cor-primary-dark;
+
+    .bandeira {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .txt-destaque {
+      font-weight: 500;
+    }
+
+    .icon-pay {
+      color: $cor-secondary !important;
+      font-weight: 500;
+    }
+  }
+
+  .transaction {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: $cor-sucess;
+  }
+
+  .txt-head {
+    color: $cor-secondary;
+    font-weight: 500;
   }
 }
