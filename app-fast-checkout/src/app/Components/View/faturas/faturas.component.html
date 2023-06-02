@@ -6,7 +6,7 @@
   <div class="row d-flex align-items-center background p-3">
     <div class="col-3">
       <p>CDC/Ligação</p>
-      <p class="fw-bold text-center" *ngIf="invoiceByIdStorage">{{invoiceByIdStorage[0].invoiceId}}</p>
+      <p class="fw-bold text-center" *ngFor="let invoice of invoiceByIdStorage">{{invoice.invoiceId}}</p>
     </div>
     <div class="col-1">
       <div class="d-flex">
@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="col-8">
-      <p *ngIf="accountContractStorage">Nome</p>
-      <p class="fw-bold" *ngIf="accountContractStorage">{{ accountContractStorage[0].name | name }}</p>
-      <p *ngIf="invoiceByIdStorage">Endereço</p>
-      <p class="fw-bold" *ngIf="invoiceByIdStorage">
-        {{ invoiceByIdStorage[0].street | address }}, {{ invoiceByIdStorage[0].district }}, {{ invoiceByIdStorage[0].zipcode | cep }}
+      <p>Nome</p>
+      <p class="fw-bold" *ngFor="let account of accountContractStorage">{{ account.name | name }}</p>
+      <p>Endereço</p>
+      <p class="fw-bold" *ngFor="let invoice of invoiceByIdStorage">
+        {{ invoice.street | address }}, {{ invoice.district }}, {{ invoice.zipcode | cep }}
       </p>
     </div>
   </div>
@@ -29,12 +29,12 @@
     </div>
   </div>
 
-  <div class="row background pb-3">
-    <div class="col pb-2 overflow-auto" *ngIf="invoiceByIdStorage">
-      <app-valor-fatura (click)="toggleInvoiceSelection(invoiceByIdStorage[0])">
-        <i icon class="bi" [ngClass]="invoiceByIdStorage[0].selected ? 'bi-check-circle' : 'bi-circle'"></i>
-        <span amount>{{invoiceByIdStorage[0].amount}}</span>
-        <span dueDate>{{invoiceByIdStorage[0].dueDate | date: 'dd/MM/yyyy'}}</span>
+  <div class="row background pb-3" *ngFor="let invoice of invoiceByIdStorage">
+    <div class="col pb-2 overflow-auto" *ngIf="invoice">
+      <app-valor-fatura (click)="toggleInvoiceSelection(invoice)">
+        <i icon class="bi" [ngClass]="invoice.selected ? 'bi-check-circle' : 'bi-circle'"></i>
+        <span amount>{{invoice.amount}}</span>
+        <span dueDate>{{invoice.dueDate | date: 'dd/MM/yyyy'}}</span>
       </app-valor-fatura>
     </div>
   </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <app-button btnNext="btnNext" dynamicRouteNext="/pagamento"></app-button>
+  <app-button btnNext="btnNext" (click)="avancar()" [disabled]="totalAmountStorage == 0"></app-button>
   <app-button btnBack="btnBack" dynamicRouteBack="/idClienteInstalacao"></app-button>
 </div>
 
@@ -69,52 +69,56 @@
           <span class="btnSelect" (click)="toggleAllInvoiceSelection()">{{ btnSelectText }}</span>
         </div>
 
-        <div *ngIf="invoiceByIdStorage">
-          <app-valor-fatura (click)="toggleInvoiceSelection(invoiceByIdStorage[0])">
-            <i icon class="bi" [ngClass]="invoiceByIdStorage[0].selected ? 'bi-check-circle' : 'bi-circle'"></i>
-            <span amount>{{invoiceByIdStorage[0].amount}}</span>
-            <span dueDate>{{invoiceByIdStorage[0].dueDate | date: 'dd/MM/yyyy'}}</span>
-          </app-valor-fatura>
+        <div *ngFor="let invoice of invoiceByIdStorage; let i = index">
+          <div *ngIf="invoice">
+            <app-valor-fatura (click)="toggleInvoiceSelection(invoice)">
+              <i icon class="bi" [ngClass]="invoice.selected ? 'bi-check-circle' : 'bi-circle'"></i>
+              <span amount>{{invoice.amount}}</span>
+              <span dueDate>{{invoice.dueDate | date: 'dd/MM/yyyy'}}</span>
+            </app-valor-fatura>
+          </div>
         </div>
       </div>
 
       <div class="d-flex gap-3 px-2">
         <app-button class="flex-grow-1" btnBack="btnBack" dynamicRouteBack="/idClienteInstalacao"></app-button>
-        <app-button class="flex-grow-1" btnNext="btnNext" dynamicRouteNext="/pagamento" [disabled]="amount == 0"></app-button>
+        <app-button class="flex-grow-1" btnNext="btnNext" (click)="avancar()" [disabled]="totalAmountStorage == 0"></app-button>
       </div>
     </div>
 
     <div class="col infosDesk">
       <div class="box">
-      <div class="campos mt-4">
-        <div class="d-flex flex-column gap-2">
-          <p class="txt-small text-uppercase">cpf</p>
-          <p class="fs-6 txt-contrast">{{ accountContractStorage[0].document | cpf }}</p>
-          <p class="txt-small text-uppercase">código do cliente</p>
-          <p class="fs-6 txt-contrast" *ngIf="invoiceByIdStorage">{{invoiceByIdStorage[0].invoiceId}}</p>
-        </div>
-      </div>
-
-      <div class="campos">
-        <p class="txt-small text-uppercase pb-3">Faturas selecionadas</p>
-
-        <div class="d-flex flex-column" *ngIf="invoiceByIdStorage[0].selected">
-          <div class="d-flex justify-content-between">
-            <p class="fw-bold m-0 fs-6">{{ invoiceByIdStorage[0].invoiceId }}</p>
-            <p class="fw-bold m-0 fs-6">R$ {{ invoiceByIdStorage[0].amount.toFixed(2) }}</p>
+        <div class="campos mt-4">
+          <div class="d-flex flex-column gap-2">
+            <p class="txt-small text-uppercase">cpf</p>
+            <p class="fs-6 txt-contrast" *ngFor="let account of accountContractStorage">{{account.document | cpf }}</p>
+            <p class="txt-small text-uppercase">código do cliente</p>
+            <p class="fs-6 txt-contrast" *ngFor="let invoice of invoiceByIdStorage">{{invoice.invoiceId}}</p>
           </div>
-          <p class="txt-small m-0 text-uppercase opacity-50">vencimento {{invoiceByIdStorage[0].dueDate | date:
-            'dd/MM/yyyy'}}</p>
         </div>
 
-        <div class="d-flex flex-column align-items-end justify-content-end gap-1 pt-3">
-          <p class="m-0">Valor total das faturas</p>
-          <p class="fw-bold m-0 fs-6">R$ {{ totalAmount.toFixed(2) }}</p>
+        <div class="campos">
+          <p class="txt-small text-uppercase pb-3">Faturas selecionadas</p>
+
+          <div *ngFor="let invoice of invoiceByIdStorage">
+            <div class="d-flex flex-column" *ngIf="invoice.selected">
+              <div class="d-flex justify-content-between">
+                <p class="fw-bold m-0 fs-6">{{ invoice.invoiceId }}</p>
+                <p class="fw-bold m-0 fs-6">R$ {{ invoice.amount.toFixed(2) }}</p>
+              </div>
+              <p class="txt-small m-0 text-uppercase opacity-50">vencimento {{invoice.dueDate | date:
+                'dd/MM/yyyy'}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column align-items-end justify-content-end gap-1 pt-3">
+            <p class="m-0">Valor total das faturas</p>
+            <p class="fw-bold m-0 fs-6">R$ {{ totalAmount.toFixed(2) }}</p>
+          </div>
         </div>
+
       </div>
-
     </div>
-  </div>
 
-  <app-footer [model]="'desktopFooter'"></app-footer>
-</div>
+    <app-footer [model]="'desktopFooter'"></app-footer>
+  </div>
