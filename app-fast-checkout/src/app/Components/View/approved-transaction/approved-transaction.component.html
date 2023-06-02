@@ -11,15 +11,16 @@
     <span class="txt-head">O comprovante foi enviado para seu e-mail!</span>
     <hr class="hr">
 
-    <div class="dadosEntrada py-3">
+    <div class="dadosEntrada py-3" *ngIf="form">
       <div class="bandeira">
         <div>
           <img class="icon" [src]="cardIcon" [alt]="textCard">
-          <span class="ps-3 txt-destaque">•••• 5678</span>
+          <span class="ps-3 txt-destaque">{{form.card_number | cartao}}</span>
         </div>
         <span id="icon-pay">Pago</span>
       </div>
-      <span class="">João A Silva</span>
+      <span>{{form.holder}}</span>
+
       <span class="txt-small">Parcelas</span>
       <span class="txt-destaque">21x de R$ 91,66</span>
       <span class="txt-small">Total</span>
@@ -111,15 +112,15 @@
 
       <span class="txt-head">O comprovante foi enviado para seu e-mail!</span>
 
-      <div class="dadosEntrada px-4">
+      <div class="dadosEntrada px-4" *ngIf="form">
         <div class="bandeira">
           <div>
             <img class="icon" [src]="cardIcon" [alt]="textCard">
-            <span class="ps-3 txt-destaque">•••• 5678</span>
+            <span class="ps-3 txt-destaque">{{form.card_number | cartao}}</span>
           </div>
           <span id="icon-pay">Pago</span>
         </div>
-        <span class="">João A Silva</span>
+        <span class="">{{form.holder}}</span>
         <span class="txt-small">Parcelas</span>
         <span class="txt-destaque">21x de R$ 91,66</span>
         <span class="txt-small">Total</span>
