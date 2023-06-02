@@ -1,5 +1,10 @@
 @import 'src/styles.scss';
 
+.container{
+  position: sticky;
+  top: 12%;
+}
+
 .step {
   width: 2.3rem;
   height: 2.3rem;
