@@ -1,7 +1,7 @@
 import { ContractAccount, Installments, Invoice } from './../Models/interfaces';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +33,24 @@ export class ApiService {
 
   getInstallments(): Observable<Installments> {
     return this.http.get<Installments>(this.urlInstallments);
+  }
+
+  postPayment(formValues: any): Observable<any> {
+    const params = new HttpParams().set("card_request", formValues);
+    return this.http.post(this.urlPayment, { params });
+  }
+
+  getPayment(): Observable<any> {
+// cardNumber: string, holder: string, brand: string, expirationDate: string, securityCode: string
+    return this.http.get<any>(this.urlPayment)
+      .pipe(
+        map(response => response[0].card_request)
+          // filter(payment => payment.cardNumber === cardNumber &&
+          //   payment.holder === holder &&
+          //   payment.brand === brand &&
+          //   payment.expirationDate === expirationDate &&
+          //   payment.securityCode === securityCode)
+      );
+
   }
 }
