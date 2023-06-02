@@ -1,4 +1,4 @@
-<div class="container-fluid" class="sticky-top background-light" *ngIf="isDesktop; else mobileTemplate">
+<div class="container" class="sticky-top background-light" *ngIf="isDesktop; else mobileTemplate">
   <div class="row pt-2">
     <div class="col-4 d-flex align-items-center gap-2 ps-4">
       <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-shield-lock-fill" viewBox="0 0 16 16">
@@ -12,7 +12,7 @@
   </div>
 </div>
 <ng-template #mobileTemplate>
-  <div class="container-fluid" [class]="backgroundClass">
+  <div class="container" [class]="backgroundClass">
     <div class="row pt-2">
       <div class="col-6 ps-4">
         <img class="logo" src="https://63228.cdn.simplo7.net/static/63228/configuracao/165670679322498.png" alt="Sua logo aqui">
